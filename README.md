@@ -64,16 +64,17 @@ Showcase website for English lessons
 
 ## Project Structure
 
-public/                 # Images, icons, static files
-src/  
+public/                  # Images, icons, static files
+src/
 ├── app/
-|   ├── about/
-│   ├── course/         # component
-|   ├── header/
-|   ├── home/
-│   ├── models/         # Interfaces and classes
-│   ├── services/       # Business logic and API calls   
-│   ├── single-course/  # component
+│   ├── about/
+│   ├── course/          # Component for listing courses
+│   ├── header/
+│   ├── home/
+│   ├── models/          # Interfaces and classes
+│   ├── services/        # Business logic and API calls
+│   └── single-course/   # Component for individual course page
+
 
 ## Components overview
 
