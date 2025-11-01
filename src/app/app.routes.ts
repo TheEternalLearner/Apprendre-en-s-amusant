@@ -5,6 +5,6 @@ import { SingleCourseComponent } from './single-course/single-course.component';
 
 export const routes: Routes = [
     {path: '', component: Home},
+    {path: 'A-propos', component: About},
     {path:':id', component: SingleCourseComponent},
-    {path: 'A-propos', component: About}
 ];
