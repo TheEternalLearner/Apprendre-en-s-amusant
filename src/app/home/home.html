@@ -1,0 +1,8 @@
+<div class="container is-centered is-4">
+    <div class="columns is-multiline is-centered">
+        @for (element of courses; track element.title) {
+            <app-course [course]="element" />
+        }
+    </div>
+</div>
+    

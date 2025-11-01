@@ -1,0 +1,10 @@
+/* 🔹 Description limitée à 3 lignes, avec "..." si trop long */
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* nombre de lignes max visibles */
+  -webkit-box-orient: vertical;
+  line-height: 1.4;
+  color: #4a4a4a; /* couleur Bulma par défaut pour le texte */
+}
