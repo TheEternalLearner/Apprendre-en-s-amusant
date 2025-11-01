@@ -13,8 +13,9 @@
             </div>
 
             <div class="content">
-                <p> {{truncate( course.description, 50)}} </p>
                 <p> Niveau : {{course.level}} </p> 
+                <p> {{truncate( course.description, 50)}} </p>
+                <button (click)="onViewCourse()" class="button is-primary is-light">Voir cours</button>
             </div>
         </div>
     </div>

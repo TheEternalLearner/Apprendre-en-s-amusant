@@ -9,7 +9,7 @@ import { Course } from '../models/course.model';
   templateUrl: './single-course.component.html',
   styleUrl: './single-course.component.css'
 })
-export class CourseComponent implements OnInit {
+export class SingleCourseComponent implements OnInit {
   course!: Course;
 
   constructor(private courseService: CourseService, private route: ActivatedRoute) {}
