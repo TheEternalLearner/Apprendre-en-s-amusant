@@ -1,0 +1,22 @@
+<!-- course-sign-up.component.html -->
+<form (ngSubmit)="onSubmit()">
+  <label>Nom :</label>
+  <input [(ngModel)]="formData.lastName" name="lastName" required>
+
+  <label>Prénom :</label>
+  <input [(ngModel)]="formData.firstName" name="firstName" required>
+
+  <label>Email :</label>
+  <input [(ngModel)]="formData.email" name="email" type="email" required>
+
+  <label>Cours :</label>
+  <select [(ngModel)]="formData.course" name="course">
+    <option value="angular">Angular</option>
+    <option value="springboot">Spring Boot</option>
+  </select>
+
+  <button type="submit">S'inscrire</button>
+</form>
+
+<!--<p *ngIf="successMessage">{{ successMessage }}</p>
+<p *ngIf="errorMessage">{{ errorMessage }}</p>-->
