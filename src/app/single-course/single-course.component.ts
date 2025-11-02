@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
 
 @Component({
   selector: 'app-single-course',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './single-course.component.html',
-  styleUrl: './single-course.component.css'
+  styleUrls: ['./single-course.component.css']
 })
 export class SingleCourseComponent implements OnInit {
   course!: Course;
