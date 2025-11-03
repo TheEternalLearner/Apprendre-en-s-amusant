@@ -1,24 +1,40 @@
-<!--TODO use bulma classes to make the sign up form pretty-->
-<!-- course-sign-up.component.html -->
-<form (ngSubmit)="onSubmit()">
-  <label>Nom :</label>
-  <input [(ngModel)]="formData.lastName" name="lastName" required>
+<div class="container">
+  <div class="columns is-centered">
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="column">
+        <label class="label">Nom :</label>
+        <input class="input" [(ngModel)]="formData.lastName" name="lastName" required>
+      </div>
+      <div class="column">
+        <label class="label">Prénom :</label>
+        <input class="input" [(ngModel)]="formData.firstName" name="firstName" required>
+      </div>
+      <div class="column">
+        <label class="label">Email :</label>
+        <input class="input" [(ngModel)]="formData.email" name="email" type="email" required>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label">Cours :</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="formData.course" name="course">
+                <option value="Course 1">Course 1</option>
+                <option value="Course 2">Course 2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <button class="button is-primary is-light" type="submit">S'inscrire</button>
+      </div>
+    </form>
+  </div>
+</div>
 
-  <label>Prénom :</label>
-  <input [(ngModel)]="formData.firstName" name="firstName" required>
-
-  <label>Email :</label>
-  <input [(ngModel)]="formData.email" name="email" type="email" required>
-
-  <label>Cours :</label>
-  <select [(ngModel)]="formData.course" name="course">
-    <option value="angular">Angular</option>
-    <option value="springboot">Spring Boot</option>
-  </select>
-
-  <button type="submit">S'inscrire</button>
-</form>
-
+<!--Question : should this be a modal?-->
 <!--TODO, use @if directive later-->
 <!--<p *ngIf="successMessage">{{ successMessage }}</p>
 <p *ngIf="errorMessage">{{ errorMessage }}</p>-->
