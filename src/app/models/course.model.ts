@@ -1,5 +1,5 @@
 export class Course {
-    id: String;
+    id: string;
     
     constructor(public title: String,  
         public description: String,
