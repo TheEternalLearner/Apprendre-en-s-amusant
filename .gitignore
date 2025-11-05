@@ -1,34 +1,36 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
+#frontend
+
+## Compiled output
 frontend/dist
 frontend/tmp
 frontend/out-tsc
 frontend/bazel-out
 
-# Node
+## Node
 frontend/node_modules
 frontend/npm-debug.log
 frontend/yarn-error.log
 
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
+## IDEs and editors
+frontend/.idea/
+frontend/.project
+frontend/.classpath
+frontend/.c9/
 *.launch
-.settings/
+frontend/.settings/
 *.sublime-workspace
 
-# Visual Studio Code
+## Visual Studio Code
 frontend/.vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
+frontend/.history/*
 
-# Miscellaneous
+## Miscellaneous
 frontend/.angular/cache
 frontend/.sass-cache/
 frontend/connect.lock
@@ -38,6 +40,42 @@ frontend/testem.log
 frontend/typings
 frontend/__screenshots__/
 
-# System files
-.DS_Store
-Thumbs.db
+## System files
+frontend/.DS_Store
+frontend/Thumbs.db
+
+#backend
+
+backend/HELP.md
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+### IntelliJ IDEA ###
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+
+### NetBeans ###
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+backend/.vscode/
