@@ -1,4 +1,4 @@
-package com.Apprendre_l_anglais.Apprendre_en_s_amusant;
+package com.ensamusant.apprendre;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
