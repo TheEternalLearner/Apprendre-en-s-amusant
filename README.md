@@ -63,16 +63,34 @@ Showcase website for English lessons
 
 ## Project Structure
 
-    public/                  # Images, icons, static files
-    src/
-    ├── app/
-    │   ├── about/
-    │   ├── course/          # Component for listing courses
-    │   ├── header/
-    │   ├── home/
-    │   ├── models/          # Interfaces and classes
-    │   ├── services/        # Business logic and API calls
-    │   └── single-course/   # Component for individual course page
+    Apprendre-en-s-amusant/
+    ├── backend/                # Spring Boot backend (API + Mail)
+    │   ├── src/
+    │   │   ├── main/
+    │   │   │   ├── java/       # Java source code (controllers, services, models)
+    │   │   │   └── resources/  # application.properties, templates, etc.
+    │   │   └── test/           # Unit and integration tests
+    │   ├── pom.xml             # Maven dependencies and build config
+    │   └── README.md           # (Optionnel) backend-specific info
+    │
+    ├── frontend/               # Angular frontend (UI)
+    │   ├── src/
+    │   │   ├── app/
+    │   │   │   ├── about/
+    │   │   │   ├── course/          # Component for listing courses
+    │   │   │   ├── header/
+    │   │   │   ├── home/
+    │   │   │   ├── models/          # Interfaces and classes
+    │   │   │   ├── services/        # Business logic and API calls
+    │   │   │   └── single-course/   # Component for individual course page
+    │   │   └── assets/              # Images, icons, static files
+    │   ├── angular.json
+    │   ├── package.json
+    │   └── tsconfig.json
+    │
+    ├── .gitignore
+    ├── LICENSE
+    └── README.md
 
 
 ## Components overview
