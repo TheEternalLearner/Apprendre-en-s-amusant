@@ -1,10 +1,15 @@
 package com.ensamusant.apprendre.controller;
 
 import com.ensamusant.apprendre.model.SignUpForm;
+import com.ensamusant.apprendre.service.MailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class SignUpFormController {
+
+    @Autowired
+    private MailService mailService;
 
     public SignUpForm createSignUpForm(String firstName, String lastName, String email) {
         SignUpForm form = new SignUpForm();
@@ -16,4 +21,7 @@ public class SignUpFormController {
         return form;
     }
 
+    public void processSignUpForm(MailService service) {
+
+    }
 }

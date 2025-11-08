@@ -24,4 +24,6 @@ public class SignUpFormControllerTest {
         assertThat(form.getLastName()).isNotEmpty().contains("Smith");
         assertThat(form.getEmail()).isNotEmpty().contains("john.smith@mail.com");
     }
+
+
 }
