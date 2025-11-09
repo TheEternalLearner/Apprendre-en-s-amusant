@@ -23,10 +23,11 @@ public class SignUpFormControllerTest {
 
     SignUpForm formUnderTest;
 
-    SignUpFormController formController = new SignUpFormController(mailService);
+    SignUpFormController formController;
 
     @BeforeEach
     public void setUpform() {
+        formController = new SignUpFormController(mailService);
         formUnderTest = new SignUpForm();
         formUnderTest.setFirstName("John");
         formUnderTest.setLastName("Smith");

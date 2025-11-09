@@ -24,6 +24,6 @@ public class SignUpFormController {
     }
 
     public void processSignUpForm(SignUpForm form) {
-
+        mailService.sendMailAfterSignUp(form);
     }
 }
