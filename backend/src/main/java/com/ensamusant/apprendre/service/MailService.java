@@ -20,7 +20,8 @@ public class MailService {
 
     public void sendMailAfterSignUp(SignUpForm form) {
         SimpleMailMessage message = new SimpleMailMessage(this.templateMessage);
-        message.setFrom(form.getEmail());
+        message.setFrom("no-reply@ensamusant.com");
+        message.setReplyTo(form.getEmail());
         message.setTo("michael.lanselle@gmail.com");
         message.setText(
                 "Dear Patty, "
