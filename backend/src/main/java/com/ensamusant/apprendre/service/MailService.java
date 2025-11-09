@@ -1,6 +1,7 @@
 package com.ensamusant.apprendre.service;
 
 import com.ensamusant.apprendre.model.SignUpForm;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,21 @@ public class MailService {
 
 
     public void sendMailAfterSignUp(SignUpForm form) {
-
-
+        SimpleMailMessage message = new SimpleMailMessage(this.templateMessage);
+        message.setFrom(form.getEmail());
+        message.setTo("michael.lanselle@gmail.com");
+        message.setText(
+                "Dear Patty, "
+                        + form.getFirstName()
+                        + " "
+                        + form.getLastName()
+                        + " s'est inscrit à un de vos cours !"
+        );
+        try {
+            this.mailSender.send(message);
+        } catch (MailException ex) {
+            System.err.println(ex.getMessage());
+        }
 
     }
 }

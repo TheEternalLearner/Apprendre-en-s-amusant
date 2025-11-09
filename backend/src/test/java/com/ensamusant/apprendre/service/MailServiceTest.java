@@ -19,7 +19,7 @@ public class MailServiceTest {
     @Mock
     private JavaMailSender mailSender;
 
-    private SignUpForm form;
+    private SignUpForm form = new SignUpForm();
 
     @Test
     public void shouldSendMailAfterSignUp() {
@@ -28,7 +28,7 @@ public class MailServiceTest {
         ArgumentCaptor<JavaMailSender> mailSenderArgumentCaptor =ArgumentCaptor.forClass(JavaMailSender.class);
         form.setFirstName("John");
         form.setLastName("Smith");
-        form.setEmail("john.smith@email.com");
+        form.setEmail("john.smith@mail.com");
 
         //Act
         mailService.sendMailAfterSignUp(form);
@@ -36,7 +36,7 @@ public class MailServiceTest {
         //Assert
         ArgumentCaptor<SimpleMailMessage> messageCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
         verify(mailSender).send(messageCaptor.capture()); SimpleMailMessage sentMessage = messageCaptor.getValue();
-        assertThat(sentMessage.getTo()).contains("john.smith@mail.com");
+        assertThat(sentMessage.getFrom()).contains("john.smith@mail.com");
         assertThat(sentMessage.getText()).contains("John", "Smith");
 
     }
