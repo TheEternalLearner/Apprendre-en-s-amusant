@@ -38,7 +38,8 @@ public class MailServiceTest {
 
         SimpleMailMessage sentMessage = messageCaptor.getValue();
 
-        assertThat(sentMessage.getFrom()).contains("john.smith@mail.com");
+        assertThat(sentMessage.getFrom()).contains("no-reply@ensamusant.com");
+        assertThat(sentMessage.getReplyTo()).contains("john.smith@mail.com");
         assertThat(sentMessage.getText()).contains("John", "Smith");
 
     }
