@@ -25,7 +25,6 @@ public class MailServiceTest {
     public void shouldSendMailAfterSignUp() {
         //Arrange
         MailService mailService = new MailService(mailSender);
-        ArgumentCaptor<JavaMailSender> mailSenderArgumentCaptor =ArgumentCaptor.forClass(JavaMailSender.class);
         form.setFirstName("John");
         form.setLastName("Smith");
         form.setEmail("john.smith@mail.com");
@@ -35,7 +34,10 @@ public class MailServiceTest {
 
         //Assert
         ArgumentCaptor<SimpleMailMessage> messageCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
-        verify(mailSender).send(messageCaptor.capture()); SimpleMailMessage sentMessage = messageCaptor.getValue();
+        verify(mailSender).send(messageCaptor.capture());
+
+        SimpleMailMessage sentMessage = messageCaptor.getValue();
+
         assertThat(sentMessage.getFrom()).contains("john.smith@mail.com");
         assertThat(sentMessage.getText()).contains("John", "Smith");
 
