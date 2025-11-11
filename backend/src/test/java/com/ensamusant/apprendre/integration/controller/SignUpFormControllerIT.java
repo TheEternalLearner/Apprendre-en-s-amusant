@@ -43,7 +43,7 @@ public class SignUpFormControllerIT {
         String formJson = "{\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"john.smith@mail.com\"}";
 
         // Act
-        mockMvc.perform(post("/api/signup")
+        mockMvc.perform(post("/api/signup/submit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(formJson))
                 .andExpect(status().isOk());
