@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -54,10 +56,10 @@ public class SignUpFormControllerTest {
 
 
         //Act
-        formController.processSignUpForm(formUnderTest);
+        ResponseEntity<Void> response = formController.processSignUpForm(formUnderTest);
 
         //Assert
-
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         verify(mailService, times(1)).sendMailAfterSignUp(formUnderTest);
     }
 }
