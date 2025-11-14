@@ -35,6 +35,9 @@
 </div>
 
 <!--Question : should this be a modal?-->
-<!--TODO, use @if directive later-->
-<!--<p *ngIf="successMessage">{{ successMessage }}</p>
-<p *ngIf="errorMessage">{{ errorMessage }}</p>-->
+@if (successMessage) {
+  <p> {{successMessage}} </p>
+}
+@if (errorMessage) {
+  <p> {{errorMessage}} </p>
+}

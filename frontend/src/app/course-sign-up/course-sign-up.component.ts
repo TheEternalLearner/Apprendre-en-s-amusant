@@ -23,7 +23,7 @@ export class CourseSignUpComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit() {
-    this.http.post('http://localhost:8080/api/signup', this.formData)
+    this.http.post('http://localhost:8080/api/signup/submit', this.formData)
       .subscribe({
         next: () => {
           this.successMessage = 'Inscription envoyée avec succès !';
