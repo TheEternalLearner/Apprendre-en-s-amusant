@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-course-sign-up',
@@ -20,18 +21,22 @@ export class CourseSignUpComponent {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   onSubmit() {
     this.http.post('http://localhost:8080/api/signup/submit', this.formData)
       .subscribe({
         next: () => {
-          this.successMessage = 'Inscription envoyée avec succès !';
-          this.errorMessage = '';
+          this.snackBar.open('Inscription envoyée avec succès !', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-success']
+          });
         },
         error: () => {
-          this.errorMessage = 'Erreur lors de l’envoi du formulaire.';
-          this.successMessage = '';
+          this.snackBar.open('Erreur lors de l\'inscription !', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-error']
+          });
         }
       });
   }
