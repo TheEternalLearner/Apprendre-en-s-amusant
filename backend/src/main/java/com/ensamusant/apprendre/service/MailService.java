@@ -23,6 +23,7 @@ public class MailService {
         message.setFrom("no-reply@ensamusant.com");
         message.setReplyTo(form.getEmail());
         message.setTo("michael.lanselle@gmail.com");
+        message.setSubject("Nouvelle demande d'inscription");
         message.setText(
                 "Dear Patty, "
                         + form.getFirstName()
