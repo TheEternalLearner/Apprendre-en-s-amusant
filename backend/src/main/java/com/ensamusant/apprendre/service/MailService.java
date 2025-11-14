@@ -25,7 +25,7 @@ public class MailService {
         message.setTo("michael.lanselle@gmail.com");
         message.setSubject("Nouvelle demande d'inscription");
         message.setText(
-                "Dear Patty, "
+                "Dear Patty,\n \n"
                         + form.getFirstName()
                         + " "
                         + form.getLastName()
