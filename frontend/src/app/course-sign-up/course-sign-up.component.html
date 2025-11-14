@@ -1,7 +1,6 @@
 <div class="container">
   <div class="columns is-centered">
-    
-    <form (ngSubmit)="onSubmit()">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="column">
         <label class="label">Nom :</label>
         <input class="input" [(ngModel)]="formData.lastName" name="lastName" required>
@@ -35,4 +34,3 @@
 </div>
 
 <!--Question : should this be a modal?-->
-

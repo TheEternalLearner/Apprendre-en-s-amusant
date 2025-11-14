@@ -1,7 +1,7 @@
 // course-sign-up.component.ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -10,21 +10,28 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   imports: [FormsModule],
   styleUrls: ['./course-sign-up.component.css']
 })
+
 export class CourseSignUpComponent {
+  private http = inject(HttpClient);
+  private snackBar = inject(MatSnackBar);
+
   formData = {
     firstName: '',
     lastName: '',
     email: '',
-    course: ''
+    course: '',
   };
 
-  successMessage = '';
-  errorMessage = '';
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.snackBar.open('Veuillez remplir tous les champs correctement.', 'OK', {
+        duration: 3000,
+        panelClass: ['snack-error']
+      });
+      return;
+    }
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
-
-  onSubmit() {
-    this.http.post('http://localhost:8080/api/signup/submit', this.formData)
+    this.http.post('http://localhost:8080/api/signup/submit', form.value)
       .subscribe({
         next: () => {
           this.snackBar.open('Inscription envoyée avec succès !', 'OK', {
@@ -33,11 +40,12 @@ export class CourseSignUpComponent {
           });
         },
         error: () => {
-          this.snackBar.open('Erreur lors de l\'inscription !', 'OK', {
+          this.snackBar.open('Erreur lors de la soumission du formulaire !', 'OK', {
             duration: 3000,
             panelClass: ['snack-error']
           });
         }
-      });
+    });
+    
   }
 }
