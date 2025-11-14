@@ -19,16 +19,6 @@ public class SignUpFormController {
         this.mailService = mailService;
     }
 
-    public SignUpForm createSignUpForm(String firstName, String lastName, String email) {
-        SignUpForm form = new SignUpForm();
-
-        form.setFirstName(firstName);
-        form.setLastName(lastName);
-        form.setEmail(email);
-
-        return form;
-    }
-
     @PostMapping("/submit")
     public ResponseEntity<Void> processSignUpForm(@RequestBody SignUpForm form) {
         mailService.sendMailAfterSignUp(form);

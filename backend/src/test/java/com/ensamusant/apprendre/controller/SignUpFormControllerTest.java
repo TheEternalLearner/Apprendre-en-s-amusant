@@ -36,24 +36,9 @@ public class SignUpFormControllerTest {
         formUnderTest.setEmail("john.smith@mail.com");
     }
 
-    // Sanity check
-    @Test
-    public void createSignUpFormTest() {
-        //Arrange
-        SignUpForm form = formController.createSignUpForm("John", "Smith", "john.smith@mail.com");
-
-        //Act
-
-        //Assert
-        assertThat(form.getFirstName()).isNotEmpty().contains("John");
-        assertThat(form.getLastName()).isNotEmpty().contains("Smith");
-        assertThat(form.getEmail()).isNotEmpty().contains("john.smith@mail.com");
-    }
-
     @Test
     public void processingSignUpFormShouldCallMailServiceWithoutError() {
         //Arrange
-
 
         //Act
         ResponseEntity<Void> response = formController.processSignUpForm(formUnderTest);
