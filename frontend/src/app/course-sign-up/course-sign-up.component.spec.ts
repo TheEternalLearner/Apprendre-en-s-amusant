@@ -1,19 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseSignUpComponent } from './course-sign-up.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
-
-//TODO Faire fonctionner ces test
+import { FormsModule, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('CourseSignUpComponent', () => {
   let component: CourseSignUpComponent;
   let fixture: ComponentFixture<CourseSignUpComponent>;
   let httpMock: HttpTestingController;
+  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(async () => {
+    snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+
     await TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule],
-      declarations: [CourseSignUpComponent]
+      imports: [CourseSignUpComponent, FormsModule, HttpClientTestingModule],
+      providers: [
+        { provide: MatSnackBar, useValue: snackBarSpy }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseSignUpComponent);
@@ -37,26 +41,57 @@ describe('CourseSignUpComponent', () => {
     expect(component.formData.course).toBe('');
   });
 
-  it('should set successMessage on successful submission', () => {
-    component.formData = { firstName: 'John', lastName: 'Doe', email: 'john@example.com', course: '1' };
-    component.onSubmit();
+  it('should show success message on successful submission', () => {
+    const mockForm = {
+      invalid: false,
+      value: { firstName: 'John', lastName: 'Doe', email: 'john@example.com', course: '1' }
+    } as NgForm;
 
-    const req = httpMock.expectOne('http://localhost:8080/api/signup');
+    component.onSubmit(mockForm);
+
+    const req = httpMock.expectOne('http://localhost:8080/api/signup/submit');
     expect(req.request.method).toBe('POST');
-    req.flush({}); // simule une réponse réussie
+    expect(req.request.body).toEqual(mockForm.value);
+    req.flush({});
 
-    //expect(component.successMessage).toBe('Inscription envoyée avec succès !');
-    //expect(component.errorMessage).toBe('');
+    expect(snackBarSpy.open).toHaveBeenCalledWith(
+      'Inscription envoyée avec succès !',
+      'OK',
+      jasmine.objectContaining({ duration: 3000 })
+    );
   });
 
-  it('should set errorMessage on failed submission', () => {
-    component.formData = { firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', course: '2' };
-    component.onSubmit();
+  it('should show error message on failed submission', () => {
+    const mockForm = {
+      invalid: false,
+      value: { firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', course: '2' }
+    } as NgForm;
 
-    const req = httpMock.expectOne('http://localhost:8080/api/signup');
+    component.onSubmit(mockForm);
+
+    const req = httpMock.expectOne('http://localhost:8080/api/signup/submit');
     req.error(new ErrorEvent('Network error'));
 
-    //expect(component.errorMessage).toBe('Erreur lors de l’envoi du formulaire.');
-    //expect(component.successMessage).toBe('');
+    expect(snackBarSpy.open).toHaveBeenCalledWith(
+      'Erreur lors de la soumission du formulaire !',
+      'OK',
+      jasmine.objectContaining({ duration: 3000 })
+    );
+  });
+
+  it('should show error message when form is invalid', () => {
+    const mockInvalidForm = {
+      invalid: true,
+      value: {}
+    } as NgForm;
+
+    component.onSubmit(mockInvalidForm);
+
+    expect(snackBarSpy.open).toHaveBeenCalledWith(
+      'Veuillez remplir tous les champs correctement.',
+      'OK',
+      jasmine.objectContaining({ duration: 3000 })
+    );
+    httpMock.expectNone('http://localhost:8080/api/signup/submit');
   });
 });

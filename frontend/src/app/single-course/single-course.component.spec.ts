@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute } from '@angular/router';
 import { SingleCourseComponent } from './single-course.component';
+import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
 
 const fakeCourse = new Course(
@@ -13,12 +14,12 @@ const fakeCourse = new Course(
 );
 
 const fakeCourseService = {
-  getCourseById: (id: number) => fakeCourse
+  getCourseById: (id: string) => fakeCourse
 };
 
 const fakeActivatedRoute = {
   snapshot: {
-    params: { id: 1 }
+    params: { id: '1' }
   }
 };
 
@@ -31,8 +32,8 @@ describe('SingleCourseComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SingleCourseComponent],
       providers:[
-        {provide: 'CourseService', useValue: 'fakeCourseService'},
-        {provide: 'ActivatedRoute', useValue: 'fakeActivatedRoute'}
+        { provide: CourseService, useValue: fakeCourseService },
+        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
       ]
     })
     .compileComponents();
@@ -48,9 +49,13 @@ describe('SingleCourseComponent', () => {
 
   it('should load the course with id 1', () => {
     expect(component.course).toEqual(fakeCourse);
+    expect(component.course.title).toBe('Cours de test');
+    expect(component.course.description).toBe('Description de test');
   });
 
-  it('should display course title in the template', () => {
-    expect(component.course.title).toBe('Cours de test');
+  it('should call getCourseById with correct id from route', () => {
+    spyOn(fakeCourseService, 'getCourseById').and.returnValue(fakeCourse);
+    component.ngOnInit();
+    expect(fakeCourseService.getCourseById).toHaveBeenCalledWith('1');
   });
 });
