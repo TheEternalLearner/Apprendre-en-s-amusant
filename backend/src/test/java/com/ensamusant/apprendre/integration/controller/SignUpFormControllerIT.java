@@ -34,7 +34,9 @@ public class SignUpFormControllerIT {
     @BeforeEach
     public void setUp() {
         formController = new SignUpFormController(mailService);
-        mockMvc = MockMvcBuilders.standaloneSetup(formController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(formController)
+                .setControllerAdvice() // Pour gérer les exceptions de validation
+                .build();
     }
 
     @Test
@@ -56,6 +58,63 @@ public class SignUpFormControllerIT {
         assertThat(capturedForm.getFirstName()).isEqualTo("John");
         assertThat(capturedForm.getLastName()).isEqualTo("Smith");
         assertThat(capturedForm.getEmail()).isEqualTo("john.smith@mail.com");
+    }
+
+    @Test
+    public void whenFirstNameIsBlank_thenReturns400() throws Exception {
+        // Arrange
+        String invalidJson = "{\"firstName\":\"\",\"lastName\":\"Smith\",\"email\":\"john@mail.com\"}";
+
+        // Act & Assert
+        mockMvc.perform(post("/api/signup/submit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidJson))
+                .andExpect(status().isBadRequest());
+
+        // Verify that mailService was never called
+        verify(mailService, times(0)).sendMailAfterSignUp(org.mockito.ArgumentMatchers.any());
+    }
+
+    @Test
+    public void whenLastNameIsBlank_thenReturns400() throws Exception {
+        // Arrange
+        String invalidJson = "{\"firstName\":\"John\",\"lastName\":\"\",\"email\":\"john@mail.com\"}";
+
+        // Act & Assert
+        mockMvc.perform(post("/api/signup/submit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidJson))
+                .andExpect(status().isBadRequest());
+
+        verify(mailService, times(0)).sendMailAfterSignUp(org.mockito.ArgumentMatchers.any());
+    }
+
+    @Test
+    public void whenEmailIsInvalid_thenReturns400() throws Exception {
+        // Arrange
+        String invalidJson = "{\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"invalid-email\"}";
+
+        // Act & Assert
+        mockMvc.perform(post("/api/signup/submit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidJson))
+                .andExpect(status().isBadRequest());
+
+        verify(mailService, times(0)).sendMailAfterSignUp(org.mockito.ArgumentMatchers.any());
+    }
+
+    @Test
+    public void whenEmailIsBlank_thenReturns400() throws Exception {
+        // Arrange
+        String invalidJson = "{\"firstName\":\"John\",\"lastName\":\"Smith\",\"email\":\"\"}";
+
+        // Act & Assert
+        mockMvc.perform(post("/api/signup/submit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(invalidJson))
+                .andExpect(status().isBadRequest());
+
+        verify(mailService, times(0)).sendMailAfterSignUp(org.mockito.ArgumentMatchers.any());
     }
 
 }

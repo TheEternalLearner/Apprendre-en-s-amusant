@@ -2,6 +2,7 @@ package com.ensamusant.apprendre.controller;
 
 import com.ensamusant.apprendre.model.SignUpForm;
 import com.ensamusant.apprendre.service.MailService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class SignUpFormController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Void> processSignUpForm(@RequestBody SignUpForm form) {
+    public ResponseEntity<Void> processSignUpForm(@Valid @RequestBody SignUpForm form) {
         mailService.sendMailAfterSignUp(form);
         return ResponseEntity.ok().build();
     }
