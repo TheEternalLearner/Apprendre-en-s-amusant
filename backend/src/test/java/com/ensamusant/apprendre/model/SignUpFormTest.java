@@ -50,4 +50,52 @@ class SignUpFormTest {
         // Assert
         assertThat(violations).isNotEmpty();
     }
+
+    // lastName - règle @NotBlank
+    @Test
+    void whenLastNameIsBlank_thenValidationFails() {
+        // Arrange
+        SignUpForm form = new SignUpForm();
+        form.setFirstName("John");
+        form.setLastName("");
+        form.setEmail("john@example.com");
+
+        // Act
+        Set<ConstraintViolation<SignUpForm>> violations = validator.validate(form);
+
+        // Assert
+        assertThat(violations).isNotEmpty();
+    }
+
+    // email - règle @NotBlank
+    @Test
+    void whenEmailIsBlank_thenValidationFails() {
+        // Arrange
+        SignUpForm form = new SignUpForm();
+        form.setFirstName("John");
+        form.setLastName("Doe");
+        form.setEmail("");
+
+        // Act
+        Set<ConstraintViolation<SignUpForm>> violations = validator.validate(form);
+
+        // Assert
+        assertThat(violations).isNotEmpty();
+    }
+
+    // email - règle @Email
+    @Test
+    void whenEmailIsInvalid_thenValidationFails() {
+        // Arrange
+        SignUpForm form = new SignUpForm();
+        form.setFirstName("John");
+        form.setLastName("Doe");
+        form.setEmail("JohnDoeMail.com");
+
+        // Act
+        Set<ConstraintViolation<SignUpForm>> violations = validator.validate(form);
+
+        // Assert
+        assertThat(violations).isNotEmpty();
+    }
 }
