@@ -1,5 +1,6 @@
 package com.ensamusant.apprendre.model;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,6 @@ public class SignUpForm {
     private String lastName;
 
     @NotBlank
+    @Email
     private String email;
 }
