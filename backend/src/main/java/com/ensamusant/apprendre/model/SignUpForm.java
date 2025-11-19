@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 public class SignUpForm {
     @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @NotBlank
     private String email;
 }
