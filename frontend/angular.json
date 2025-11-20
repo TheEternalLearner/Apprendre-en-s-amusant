@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "English-app": {
+    "apprendre-en-s-amusant": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "English-app:build:production"
+              "buildTarget": "apprendre-en-s-amusant:build:production"
             },
             "development": {
-              "buildTarget": "English-app:build:development"
+              "buildTarget": "apprendre-en-s-amusant:build:development"
             }
           },
           "defaultConfiguration": "development"
