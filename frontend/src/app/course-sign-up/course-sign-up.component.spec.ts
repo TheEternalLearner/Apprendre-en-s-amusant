@@ -3,20 +3,24 @@ import { CourseSignUpComponent } from './course-sign-up.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 describe('CourseSignUpComponent', () => {
   let component: CourseSignUpComponent;
   let fixture: ComponentFixture<CourseSignUpComponent>;
   let httpMock: HttpTestingController;
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
     snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
       imports: [CourseSignUpComponent, FormsModule, HttpClientTestingModule],
       providers: [
-        { provide: MatSnackBar, useValue: snackBarSpy }
+        { provide: MatSnackBar, useValue: snackBarSpy },
+        { provide: Router, useValue: routerSpy }
       ]
     }).compileComponents();
 
@@ -93,5 +97,19 @@ describe('CourseSignUpComponent', () => {
       jasmine.objectContaining({ duration: 3000 })
     );
     httpMock.expectNone('http://localhost:8080/api/signup/submit');
+  });
+
+  it('should redirect to home page after successful submission', () => {
+    const mockForm = {
+      invalid: false,
+      value: { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', course: '3' }
+    } as NgForm;
+
+    component.onSubmit(mockForm);
+
+    const req = httpMock.expectOne('http://localhost:8080/api/signup/submit');
+    req.flush({});
+
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
   });
 });
