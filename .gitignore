@@ -43,6 +43,11 @@ frontend/testem.log
 frontend/typings
 frontend/__screenshots__/
 
+## Cypress
+frontend/cypress/videos
+frontend/cypress/screenshots
+frontend/cypress/downloads
+
 ## System files
 frontend/.DS_Store
 frontend/Thumbs.db
