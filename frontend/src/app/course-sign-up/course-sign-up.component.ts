@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-sign-up',
@@ -14,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CourseSignUpComponent {
   private http = inject(HttpClient);
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   formData = {
     firstName: '',
@@ -38,6 +40,7 @@ export class CourseSignUpComponent {
             duration: 3000,
             panelClass: ['snack-success']
           });
+          this.router.navigate(['/']);
         },
         error: () => {
           this.snackBar.open('Erreur lors de la soumission du formulaire !', 'OK', {
