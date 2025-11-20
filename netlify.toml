@@ -1,7 +1,10 @@
 [build]
   base = "frontend"
-  command = "npm run build"
+  command = "npm run build -- --configuration production"
   publish = "dist/apprendre-en-s-amusant/browser"
+  
+[build.environment]
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
