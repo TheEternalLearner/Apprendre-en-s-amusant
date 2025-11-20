@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="columns is-centered">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="column">
+        <label class="label">Nom :</label>
+        <input class="input" [(ngModel)]="formData.lastName" name="lastName" required>
+      </div>
+      <div class="column">
+        <label class="label">Prénom :</label>
+        <input class="input" [(ngModel)]="formData.firstName" name="firstName" required>
+      </div>
+      <div class="column">
+        <label class="label">Email :</label>
+        <input class="input" [(ngModel)]="formData.email" name="email" type="email" required>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label">Cours :</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="formData.course" name="course">
+                <option value="Course 1">Course 1</option>
+                <option value="Course 2">Course 2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <button class="button is-primary is-light" type="submit">S'inscrire</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Question : should this be a modal?-->
