@@ -3,8 +3,6 @@ package com.ensamusant.apprendre;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertySource;
 
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -5,6 +5,7 @@ import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
 
 const fakeCourse = new Course(
+  1,
   'Cours de test',
   'Description de test',
   'test.jpg',

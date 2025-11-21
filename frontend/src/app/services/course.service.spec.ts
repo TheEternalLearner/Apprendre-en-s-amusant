@@ -27,6 +27,6 @@ describe('CourseService', () => {
   });
 
   it('should throw error if course not found', () => {
-    expect(() => service.getCourseById('non-existent-id')).toThrowError('Course not found');
+    expect(() => service.getCourseById(999)).toThrowError('Course not found');
   });
 });

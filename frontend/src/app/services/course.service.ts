@@ -10,21 +10,21 @@ export class CourseService {
     * Dans le cas d'outil admin 
     */
   private courses: Course[] = [
-    new Course('My first Course',
+    new Course(1, 'My first Course',
       'This course is dedicated to learning the basics concepts',
       'https://cdn.pixabay.com/photo/2015/11/26/09/14/school-1063556_960_720.jpg',
       12,
       'Beginner',
       '8-12 years'
     ),
-    new Course('My second Course',
+    new Course(2, 'My second Course',
       'This course is dedicated to learning intermediate concepts',
       'https://cdn.pixabay.com/photo/2014/10/14/20/14/library-488678_960_720.jpg',
       8,
       'Beginner',
       '8-12 years'
     ),
-    new Course('My third Course',
+    new Course(3, 'My third Course',
       'This course is dedicated to learning intermediate concepts',
       'https://cdn.pixabay.com/photo/2015/05/19/14/55/educational-773651_960_720.jpg',
       15,
@@ -37,7 +37,7 @@ export class CourseService {
     return  [...this.courses];
   }
 
-  getCourseById(CourseId: string): Course {
+  getCourseById(CourseId: number): Course {
     const foundCourse = this.courses.find(course => course.id === CourseId);
     if (!foundCourse) {
       throw new Error('Course not found');
