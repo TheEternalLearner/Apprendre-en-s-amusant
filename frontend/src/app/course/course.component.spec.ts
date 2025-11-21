@@ -10,6 +10,7 @@ describe('CourseComponent', () => {
   let router: Router;
 
   const mockCourse = new Course(
+      1,
       'Test Title',
       'Test Description',
       'image.jpg',
