@@ -35,7 +35,7 @@ public class SignUpFormControllerIT {
     public void setUp() {
         formController = new SignUpFormController(mailService);
         mockMvc = MockMvcBuilders.standaloneSetup(formController)
-                .setControllerAdvice() // Pour gérer les exceptions de validation
+                .setControllerAdvice() // to manage validation exception
                 .build();
     }
 
