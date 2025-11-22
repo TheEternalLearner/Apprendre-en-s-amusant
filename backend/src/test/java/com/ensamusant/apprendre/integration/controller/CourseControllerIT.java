@@ -110,6 +110,24 @@ public class CourseControllerIT {
 
     }
 
+    @Test
+    public void deleteCourse_ShouldReturnStatus200AndDeleteCourse() throws Exception {
+        // Arrange
+        Course course = new Course();
+        course.setTitle("title");
+        course.setDescription("description");
+        course.setImageUrl("image.jpeg");
+        course.setCapacity(3);
+        course.setLevel("Beginner");
+        course.setAgeBracket("12-14");
+        courseRepository.save(course);
+
+        // Act & Assert
+        mockMvc.perform(delete("/api/courses/" + course.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty());
+    }
+
     @AfterEach
     public void cleanUp() {
         courseRepository.deleteAll();
