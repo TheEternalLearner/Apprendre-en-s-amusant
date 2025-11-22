@@ -54,6 +54,13 @@ public class CourseControllerIT {
                 .andExpect(jsonPath("$.title").value("title"));
     }
 
+
+    @Test
+    public void getCourseById_ShouldReturnStatus404IfIdDoesNotExist() throws Exception {
+        // Act & Assert
+        mockMvc.perform(get("/api/courses/1"))
+                .andExpect(status().isNotFound());
+    }
     @AfterEach
     public void cleanUp() {
         courseRepository.deleteAll();
