@@ -3,9 +3,8 @@ package com.ensamusant.apprendre.controller;
 import com.ensamusant.apprendre.model.Course;
 import com.ensamusant.apprendre.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -23,5 +22,15 @@ public class CourseController {
     @GetMapping("")
     public Iterable<Course> getCourses() {
         return courseService.getCourses();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Course> getCourseById(@PathVariable("id") Long id) {
+        Optional<Course> course = courseService.getCourse(id);
+        if (course.isPresent()) {
+            return ResponseEntity.ok(course.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
