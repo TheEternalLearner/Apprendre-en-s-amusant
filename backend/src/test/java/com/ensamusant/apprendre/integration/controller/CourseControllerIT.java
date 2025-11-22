@@ -124,8 +124,10 @@ public class CourseControllerIT {
 
         // Act & Assert
         mockMvc.perform(delete("/api/courses/" + course.getId()))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isEmpty());
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/courses/" + course.getId()))
+                .andExpect(status().isNotFound());
     }
 
     @AfterEach

@@ -76,4 +76,15 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCourse(@PathVariable("id") Long id) {
+        Optional<Course> deletedCourse = courseService.getCourse(id);
+        if (deletedCourse.isPresent()) {
+            courseService.deleteCourse(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
