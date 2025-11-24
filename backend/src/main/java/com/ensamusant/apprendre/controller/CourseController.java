@@ -50,25 +50,25 @@ public class CourseController {
             if (newTitle != null && !newTitle.isEmpty()) {
                 savedCourse.setTitle(newTitle);
             }
-            String newDescription = newCourse.getDescription();
-            if (newDescription != null && !newDescription.isEmpty()) {
-                savedCourse.setDescription(newDescription);
-            }
-            String newImageUrl = newCourse.getImageUrl();
-            if (newImageUrl != null && !newImageUrl.isEmpty()) {
-                savedCourse.setImageUrl(newImageUrl);
-            }
             Integer newCapacity = newCourse.getCapacity();
-            if (newCapacity > 0) {
+            if (newCapacity != null && newCapacity > 0) {
                 savedCourse.setCapacity(newCapacity);
             }
             String newLevel = newCourse.getLevel();
             if (newLevel != null && !newLevel.isEmpty()) {
                 savedCourse.setLevel(newLevel);
             }
-            String newAgeBracket = newCourse.getAgeBracket();
-            if (newAgeBracket != null && !newAgeBracket.isEmpty()) {
-                savedCourse.setAgeBracket(newAgeBracket);
+            String newDayOfWeek = newCourse.getDayOfWeek();
+            if (newDayOfWeek != null && !newDayOfWeek.isEmpty()) {
+                savedCourse.setDayOfWeek(newDayOfWeek);
+            }
+            String newTimeSlot = newCourse.getTimeSlot();
+            if (newTimeSlot != null && !newTimeSlot.isEmpty()) {
+                savedCourse.setTimeSlot(newTimeSlot);
+            }
+            String newLocation = newCourse.getLocation();
+            if (newLocation != null && !newLocation.isEmpty()) {
+                savedCourse.setLocation(newLocation);
             }
             courseService.saveCourse(savedCourse);
             return ResponseEntity.ok(savedCourse);

@@ -30,19 +30,19 @@ public class CourseControllerIT {
     @Test
     public void createCourse_ShouldReturnStatus201AndCreateCourse() throws Exception {
         // Arrange
-        String formJson = "{\"title\":\"title\",\"description\":\"description\",\"imageUrl\":\"image.jpeg\",\"capacity\": 4,\"level\":\"beginner\",\"ageBracket\":\"6-8\"}";
+        String formJson = "{\"title\":\"English Course\",\"capacity\": 10,\"level\":\"Beginner\",\"dayOfWeek\":\"Monday\",\"timeSlot\":\"14:00-16:00\",\"location\":\"Room 101\"}";
 
         // Act & Assert
         mockMvc.perform(post("/api/courses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(formJson))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.title").value("title"))
-                .andExpect(jsonPath("$.description"). value("description"))
-                .andExpect(jsonPath("$.imageUrl").value("image.jpeg"))
-                .andExpect(jsonPath("$.capacity").value(4))
-                .andExpect(jsonPath("$.level").value("beginner"))
-                .andExpect(jsonPath("$.ageBracket").value("6-8"))
+                .andExpect(jsonPath("$.title").value("English Course"))
+                .andExpect(jsonPath("$.capacity").value(10))
+                .andExpect(jsonPath("$.level").value("Beginner"))
+                .andExpect(jsonPath("$.dayOfWeek").value("Monday"))
+                .andExpect(jsonPath("$.timeSlot").value("14:00-16:00"))
+                .andExpect(jsonPath("$.location").value("Room 101"))
                 .andExpect(jsonPath("$.id").exists());
     }
 
@@ -58,12 +58,12 @@ public class CourseControllerIT {
     public void getCourseById_ShouldReturnStatus200IfIdExists() throws Exception {
         // Arrange
         Course course = new Course();
-        course.setTitle("title");
-        course.setDescription("description");
-        course.setImageUrl("image.jpeg");
-        course.setCapacity(3);
-        course.setLevel("Beginner");
-        course.setAgeBracket("12-14");
+        course.setTitle("Enfant 12-14");
+        course.setCapacity(15);
+        course.setLevel("Intermediate");
+        course.setDayOfWeek("Tuesday");
+        course.setTimeSlot("10:00-12:00");
+        course.setLocation("Visio");
         courseRepository.save(course);
 
 
@@ -71,7 +71,7 @@ public class CourseControllerIT {
         mockMvc.perform(get("/api/courses/" + course.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(course.getId()))
-                .andExpect(jsonPath("$.title").value("title"));
+                .andExpect(jsonPath("$.title").value("Enfant 12-14"));
     }
 
 
@@ -86,27 +86,27 @@ public class CourseControllerIT {
     public void updateCourse_ShouldReturnStatus200AndUpdateCourseCorrectly() throws Exception {
         // Arrange
         Course course = new Course();
-        course.setTitle("title");
-        course.setDescription("description");
-        course.setImageUrl("image.jpeg");
-        course.setCapacity(3);
-        course.setLevel("Beginner");
-        course.setAgeBracket("12-14");
+        course.setTitle("Adult course");
+        course.setCapacity(20);
+        course.setLevel("Advanced");
+        course.setDayOfWeek("Thursday");
+        course.setTimeSlot("15:00-17:00");
+        course.setLocation("La Sentinelle");
         courseRepository.save(course);
 
-        String formJson = "{\"title\":\"new title\",\"description\":\"updated description\",\"imageUrl\":\"image2.png\",\"capacity\": 8,\"level\":\"Intermediate\",\"ageBracket\":\"6-8\"}";
+        String formJson = "{\"title\":\"Adult course\",\"capacity\": 20,\"level\":\"Advanced\",\"dayOfWeek\":\"Thursday\",\"timeSlot\":\"15:00-17:00\",\"location\":\"La Sentinelle\"}";
 
         // Act & Assert
         mockMvc.perform(put("/api/courses/" + course.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(formJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("new title"))
-                .andExpect(jsonPath("$.description").value("updated description"))
-                .andExpect(jsonPath("$.imageUrl").value("image2.png"))
-                .andExpect(jsonPath("$.capacity").value(8))
-                .andExpect(jsonPath("$.level").value("Intermediate"))
-                .andExpect(jsonPath("$.ageBracket").value("6-8"));
+                .andExpect(jsonPath("$.title").value("Adult course"))
+                .andExpect(jsonPath("$.capacity").value(20))
+                .andExpect(jsonPath("$.level").value("Advanced"))
+                .andExpect(jsonPath("$.dayOfWeek").value("Thursday"))
+                .andExpect(jsonPath("$.timeSlot").value("15:00-17:00"))
+                .andExpect(jsonPath("$.location").value("La Sentinelle"));
 
     }
 
@@ -114,12 +114,12 @@ public class CourseControllerIT {
     public void deleteCourse_ShouldReturnStatus200AndDeleteCourse() throws Exception {
         // Arrange
         Course course = new Course();
-        course.setTitle("title");
-        course.setDescription("description");
-        course.setImageUrl("image.jpeg");
-        course.setCapacity(3);
+        course.setTitle("Course to Delete");
+        course.setCapacity(8);
         course.setLevel("Beginner");
-        course.setAgeBracket("12-14");
+        course.setDayOfWeek("Friday");
+        course.setTimeSlot("13:00-15:00");
+        course.setLocation("Room 505");
         courseRepository.save(course);
 
         // Act & Assert

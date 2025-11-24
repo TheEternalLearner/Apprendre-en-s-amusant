@@ -16,19 +16,19 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String description;
-    private String imageUrl;
     private Integer capacity;
     private String level;
-    private String ageBracket;
+    private String dayOfWeek;
+    private String timeSlot;
+    private String location;
 
-    public Course(String title, String description, String imageUrl, Integer capacity, String level, String ageBracket) {
+    public Course(String title, Integer capacity, String level, String dayOfWeek, String timeSlot, String location) {
         this.title = title;
-        this.description = description;
-        this.imageUrl = imageUrl;
         this.capacity = capacity;
         this.level = level;
-        this.ageBracket = ageBracket;
+        this.dayOfWeek = dayOfWeek;
+        this.timeSlot = timeSlot;
+        this.location = location;
     }
 
 }
