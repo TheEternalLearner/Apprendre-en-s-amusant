@@ -1,10 +1,5 @@
 <div class="column">
     <div class="card">
-        <div class="card-image m-5 pt-5">
-            <figure class="image is-4by3">
-                <img src="{{course.imageUrl}}" alt=""/>
-            </figure>
-        </div>
         <div class="card-content">
             <div class="media">
             <div class="media-content">
@@ -13,8 +8,11 @@
             </div>
 
             <div class="content">
-                <p> Niveau : {{course.level}} </p> 
-                <p> {{truncate( course.description, 50)}} </p>
+                <p><strong>Niveau :</strong> {{course.level}}</p>
+                <p><strong>Jour :</strong> {{course.dayOfWeek}}</p>
+                <p><strong>Horaire :</strong> {{course.timeSlot}}</p>
+                <p><strong>Lieu :</strong> {{course.location}}</p>
+                <p><strong>Places :</strong> {{course.capacity}}</p>
                 <button (click)="onViewCourse()" class="button is-primary is-light">Voir cours</button>
             </div>
         </div>
