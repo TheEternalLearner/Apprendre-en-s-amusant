@@ -19,8 +19,11 @@ export class SingleCourseComponent implements OnInit {
   }
 
   private getCourse(): void {
-    const CourseId = this.route.snapshot.params['id'];
-    this.course = this.courseService.getCourseById(CourseId);
+    const CourseId = +this.route.snapshot.params['id'];
+    this.courseService.getCourseById(CourseId).subscribe({
+      next: (course) => this.course = course,
+      error: (error) => console.error('Erreur lors du chargement du cours:', error)
+    });
   }
 
 }

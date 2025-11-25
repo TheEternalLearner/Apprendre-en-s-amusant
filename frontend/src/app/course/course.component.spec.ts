@@ -12,11 +12,11 @@ describe('CourseComponent', () => {
   const mockCourse = new Course(
       1,
       'Test Title',
-      'Test Description',
-      'image.jpg',
       20,
       'Avancé',
-      '10-12 ans'
+      'Lundi',
+      '14:00-16:00',
+      'Visio'
     );
 
   beforeEach(async () => {

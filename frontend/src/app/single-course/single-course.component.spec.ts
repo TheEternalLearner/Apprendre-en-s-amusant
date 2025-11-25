@@ -3,24 +3,25 @@ import { ActivatedRoute } from '@angular/router';
 import { SingleCourseComponent } from './single-course.component';
 import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
+import { of } from 'rxjs';
 
 const fakeCourse = new Course(
   1,
   'Cours de test',
-  'Description de test',
-  'test.jpg',
   15,
   'Débutant',
-  '6-9 ans'
+  'Lundi',
+  '14:00-16:00',
+  'La Sentinelle'
 );
 
 const fakeCourseService = {
-  getCourseById: (id: string) => fakeCourse
+  getCourseById: (id: number) => of(fakeCourse)
 };
 
 const fakeActivatedRoute = {
   snapshot: {
-    params: { id: '1' }
+    params: { id: 1 }
   }
 };
 
@@ -51,12 +52,12 @@ describe('SingleCourseComponent', () => {
   it('should load the course with id 1', () => {
     expect(component.course).toEqual(fakeCourse);
     expect(component.course.title).toBe('Cours de test');
-    expect(component.course.description).toBe('Description de test');
+    expect(component.course.level).toBe('Débutant');
   });
 
   it('should call getCourseById with correct id from route', () => {
-    spyOn(fakeCourseService, 'getCourseById').and.returnValue(fakeCourse);
+    spyOn(fakeCourseService, 'getCourseById').and.returnValue(of(fakeCourse));
     component.ngOnInit();
-    expect(fakeCourseService.getCourseById).toHaveBeenCalledWith('1');
+    expect(fakeCourseService.getCourseById).toHaveBeenCalledWith(1);
   });
 });

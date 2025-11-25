@@ -15,6 +15,9 @@ export class Home implements OnInit {
   constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
-    this.courses = this.courseService.getCourses();
+    this.courseService.getCourses().subscribe({
+      next: (courses) => this.courses = courses,
+      error: (error) => console.error('Erreur lors du chargement des cours:', error)
+    });
   }
 }
