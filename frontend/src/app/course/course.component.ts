@@ -14,6 +14,6 @@ export class CourseComponent {
   constructor(private router:Router) {}
 
   onViewCourse() {
-    this.router.navigateByUrl(`/${this.course.id}`);
+    this.router.navigate(['/inscription'], { queryParams: { courseId: this.course.id } });
   }
 }
