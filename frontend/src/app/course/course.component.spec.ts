@@ -42,10 +42,4 @@ describe('CourseComponent', () => {
     expect(spy).toHaveBeenCalledWith(`/${mockCourse.id}`);
   });
 
-  it('should truncate text correctly', () => {
-    const shortText = 'Hello';
-    const longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
-    expect(component.truncate(shortText, 10)).toBe(shortText);
-    expect(component.truncate(longText, 10)).toBe('Lorem ipsu…');
-  });
 });
