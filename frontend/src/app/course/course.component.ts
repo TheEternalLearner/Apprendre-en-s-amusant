@@ -16,9 +16,4 @@ export class CourseComponent {
   onViewCourse() {
     this.router.navigateByUrl(`/${this.course.id}`);
   }
-
-  truncate(text: String, maxLength: number): String {
-    if (!text) return '';
-    return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
-  }
 }
