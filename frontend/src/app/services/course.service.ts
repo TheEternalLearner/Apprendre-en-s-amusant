@@ -19,4 +19,11 @@ export class CourseService {
     return this.http.get<Course>(`${this.apiUrl}/${courseId}`);
   }
 
+  editCourse(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
+  }
+
+  deleteCourse(courseId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${courseId}`);
+  }
 }
