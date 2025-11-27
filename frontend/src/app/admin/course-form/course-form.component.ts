@@ -42,8 +42,21 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit(form:NgForm) {
-    
-    this.router.navigate(['/admin/courses']);
+    if (this.course.id) {
+      this.courseService.editCourse(this.course).subscribe({
+        next: () => {
+          this.router.navigate(['/admin/cours']);
+        },
+        error: (err) => console.error('Erreur d\'édition:', err)
+      });
+    } else {
+      this.courseService.createCourse(this.course).subscribe({
+        next: () => {
+          this.router.navigate(['/admin/cours']);
+        },
+        error: (err) => console.error('Erreur de création:', err)
+      });
+    }
   }
 
 }
