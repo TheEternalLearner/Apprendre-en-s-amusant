@@ -1,23 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseComponent } from "../course/course.component";
-import { Course } from '../models/course.model';
-import { CourseService } from '../services/course.service';
+import { Section } from '../models/section.model';
+import { SectionComponent } from "../section/section";
 
 @Component({
   selector: 'app-home',
-  imports: [CourseComponent],
+  imports: [SectionComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home implements OnInit {
-  courses!: Course[];
-
-  constructor(private courseService: CourseService) {}
-
-  ngOnInit(): void {
-    this.courseService.getCourses().subscribe({
-      next: (courses) => this.courses = courses,
-      error: (error) => console.error('Erreur lors du chargement des cours:', error)
-    });
-  }
+export class Home {
+  public sections: Section[] = [
+      new Section("Cours disponibles", 'https://cdn.pixabay.com/photo/2015/11/26/09/14/school-1063556_960_720.jpg', '/cours'),
+      new Section("Notre Approche pédagogique", 'https://cdn.pixabay.com/photo/2015/11/26/09/14/school-1063556_960_720.jpg', '/methodes'),
+      new Section("Stage et Ateliers", 'https://cdn.pixabay.com/photo/2015/11/26/09/14/school-1063556_960_720.jpg', '/stages')
+    ];
 }
