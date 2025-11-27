@@ -5,6 +5,7 @@ import { CourseService } from '../../services/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../../models/course.model';
 import { of } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 describe('CourseFormComponent', () => {
   let component: CourseFormComponent;
@@ -56,5 +57,29 @@ describe('CourseFormComponent', () => {
 
     expect(component.course).toEqual(mockCourse);
     expect(mockCourseService.getCourseById).toHaveBeenCalledWith(1);
+  })
+
+  it('should call createCouse when submitting in create mode', () => {
+    const mockForm = {} as NgForm;
+    const newCourse = new Course(0, 'New Course', 15, 'Débutant', 'Mardi', '10:00-12:00', 'La Sentinelle');
+    mockCourseService.createCourse.and.returnValue(of(newCourse));
+    component.course = newCourse;
+
+    component.onSubmit(mockForm);
+
+    expect(mockCourseService.createCourse).toHaveBeenCalledWith(newCourse);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/admin/courses']);
+  })
+
+  it('should call editCourse when submitting in edit mode', () => {
+    const mockForm = {} as NgForm;
+    const existingCourse = new Course(2, 'Existing Course', 25, 'Intermédiaire', 'Mercredi', '14:00-16:00', 'Visio');
+    mockCourseService.editCourse.and.returnValue(of(existingCourse));
+    component.course = existingCourse;
+
+    component.onSubmit(mockForm);
+
+    expect(mockCourseService.editCourse).toHaveBeenCalledWith(existingCourse);
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['/admin/courses']);
   })
 });
