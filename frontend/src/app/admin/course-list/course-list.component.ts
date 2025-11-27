@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 
 @Component({
-  selector: 'app-course-list',
+  selector: 'app-admin-course-list',
   imports: [],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
-export class CourseListComponent {
+export class AdminCourseListComponent {
   courses!: Course[];
     private router = inject(Router);
   
