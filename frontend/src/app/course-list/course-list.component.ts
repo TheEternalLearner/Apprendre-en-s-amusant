@@ -1,12 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
-import { CourseComponent } from '../course/course.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
-  imports: [CourseComponent],
+  imports: [],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })

@@ -1,21 +1,10 @@
-<div class="container">
-    <div class="card">
-        <div class="card-image">
-            <figure class="image is-4by3">
-                <img src="{{ section.imageUrl}}" alt="Placeholder image">
-            </figure>
-        </div>
-        <div class="card-content">
-            <div class="media">
-                <div class="media-content">
-                    <p class="title is-4"> {{ section.title}} </p>
-                </div>
-                
-                        
-            </div>
-            <button class="button is-primary" (click)="onClick()">
-                Voir plus
-            </button>
-        </div>
+<div class="card" (click)="onClick()">
+    <div class="card-image m-5 pt-5">
+        <figure class="image is-3by2">
+            <img src="{{ section.imageUrl}}" alt="Placeholder image">
+        </figure>
+    </div>
+    <div class="card-content is-centered">
+        <p class="title is-4 is-centered"> {{ section.title}} </p>   
     </div>
 </div>

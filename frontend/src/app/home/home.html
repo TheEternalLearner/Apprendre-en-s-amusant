@@ -1,7 +1,9 @@
 <div class="container is-centered is-4">
     <div class="columns is-multiline is-centered">
         @for (element of sections; track element.title) {
-            <app-section [section]="element" />
+            <div class="column is-4">
+                <app-section [section]="element" />
+            </div>
         }
     </div>
 </div>
