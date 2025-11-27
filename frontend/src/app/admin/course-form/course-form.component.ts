@@ -17,18 +17,11 @@ export class CourseFormComponent implements OnInit {
 
   course!: Course;
 
-  formData = {
-    title: '',
-    capacity: 0,
-    level: '',
-    dayOfTheWeek: '',
-    timeSlot: '',
-    location: ''
-  };
-
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
+      this.course = new Course(0, '', 0, '', '', '', '');
+      
       this.courseService.getCourseById(+id).subscribe({
         next: (course) => {
           this.course = course;
@@ -37,6 +30,8 @@ export class CourseFormComponent implements OnInit {
           console.error('Error loading course:', err);
         }
       });
+    } else {
+      this.course = new Course(0, '', 0, '', '', '', '');
     }
     
   }

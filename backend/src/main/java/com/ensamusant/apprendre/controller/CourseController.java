@@ -22,6 +22,7 @@ public class CourseController {
 
     @PostMapping("")
     public ResponseEntity<Course> createCourse(@RequestBody Course newCourse) {
+        newCourse.setId(null); // removing id to force new id creation
         Course savedCourse = courseService.saveCourse(newCourse);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCourse);
     }
