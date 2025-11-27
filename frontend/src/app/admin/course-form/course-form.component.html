@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="columns is-centered">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="column">
+        <label class="label">Intitulé :</label>
+        <input class="input" [(ngModel)]="formData.title" name="title" required>
+      </div>
+      
+      <div class="column">
+        <label class="label">Niveau :</label>
+        <input class="input" [(ngModel)]="formData.level" name="level" required>
+      </div>
+      <div class="column">
+        <label class="label">Jour:</label>
+        <input class="input" [(ngModel)]="formData.dayOfTheWeek" name="dayOfTheWeek" required>
+      </div>
+      <div class="column">
+        <label class="label">Horaire :</label>
+        <input class="input" [(ngModel)]="formData.timeSlot" name="timeSlot" required>
+      </div>
+      <div class="column">
+        <label class="label">Lieu :</label>
+        <input class="input" [(ngModel)]="formData.location" name="location" required>
+      </div>
+      <div class="column">
+        <label class="label">Capacité :</label>
+        <input class="input" [(ngModel)]="formData.capacity" name="capacity" required>
+      </div>
+      <div class="column">
+        <button class="button is-primary is-light" type="submit">Sauvegarder</button>
+      </div>
+    </form>
+  </div>
+</div>
