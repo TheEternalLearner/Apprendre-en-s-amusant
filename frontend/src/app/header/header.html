@@ -1,23 +1,27 @@
-<header class="navbar is-light is-spaced shadow-sm">
-  <div class="container">
-    <!-- Titre / Logo -->
-    <div class="navbar-brand">
-      <h1 class="navbar-item title is-5 mb-0">Apprendre l'anglais en s'amusant</h1>
-    </div>
+<header class="navbar is-light is-spaced shadow-sm is-fullwidth">
+  <!-- Logo / Brand -->
+  <div class="navbar-brand">
+    <a class="navbar-item" routerLink="/">
+      <img src="/img/logo statue.png" alt="Logo" style="max-height: 3rem;">
+    </a>
+    <h1 class="navbar-item title is-5 mb-0">Apprendre l'Anglais en s'Amusant</h1>
+  </div>
 
-    <!-- Menu de navigation -->
-    <div class="navbar-menu is-active">
-      <div class="navbar-end">
-        <a class="navbar-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          Accueil
-        </a>
-        <a class="navbar-item" routerLink="/A-propos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          À propos
-        </a>
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary is-light" href="mailto:michael.lansele@notreal.com">Contact</a>
-          </div>
+  <!-- Navigation menu -->
+  <div class="navbar-menu is-active">
+    <div class="navbar-end">
+      <a class="navbar-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Accueil
+      </a>
+      <a class="navbar-item ml-2" routerLink="/A-propos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        À propos
+      </a>
+      <a class="navbar-item ml-2" routerLink="/admin/cours" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Administration
+      </a>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary is-light" href="mailto:michael.lansele@notreal.com">Contact</a>
         </div>
       </div>
     </div>
