@@ -28,7 +28,7 @@ describe('CourseFormComponent', () => {
    
   });
 
-  it('course attribut should be undefined when in create mode when no id in route', () => {
+  it('course should be initialized with empty values in create mode when no id in route', () => {
     // Arrange
     TestBed.overrideProvider(ActivatedRoute, {
       useValue: { snapshot: { paramMap: { get: () => null}}}
@@ -40,10 +40,12 @@ describe('CourseFormComponent', () => {
     fixture.detectChanges();
 
     // Assert
-    expect(component.course).toBeUndefined();
+    expect(component.course).toBeDefined();
+    expect(component.course.id).toBe(0);
+    expect(component.course.title).toBe('');
   })
 
-  it('course attribut should be defined in edit mode when id is in route', () => {
+  it('course should be initialized then loaded from API in edit mode when id is in route', () => {
     // Arrange
     const mockCourse = new Course(1, 'Test Title', 20, 'Avancé', 'Lundi', '14:00-16:00', 'Visio');
     mockCourseService.getCourseById.and.returnValue(of(mockCourse));
@@ -54,9 +56,9 @@ describe('CourseFormComponent', () => {
     // Act
     fixture = TestBed.createComponent(CourseFormComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    // Assert
+    fixture.detectChanges(); // Trigger ngOnInit
+    
+    // Assert - after ngOnInit, course is loaded from API
     expect(component.course).toEqual(mockCourse);
     expect(mockCourseService.getCourseById).toHaveBeenCalledWith(1);
   })
