@@ -1,0 +1,52 @@
+<div class="container">
+    <h1 class="title has-text-centered mb-6">Gestion des cours</h1>
+    
+    <div class="buttons mb-4">
+      <button class="button is-primary" (click)="onCreate()">
+        <span class="icon">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span>Créer un nouveau cours</span>
+      </button>
+    </div>
+
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th class="has-text-left">Intitulé</th>
+                <th class="has-text-centered">Niveau</th>
+                <th class="has-text-centered">Jour</th>
+                <th class="has-text-centered">Horaire</th>
+                <th class="has-text-centered">Lieu</th>
+                <th class="has-text-centered">Capacité</th>
+                <th class="has-text-right"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (course of courses; track course.id) {
+                <tr>
+                    <td class="has-text-left"><strong>{{ course.title }}</strong></td>
+                    <td class="has-text-centered"><span class="tag is-info">{{ course.level }}</span></td>
+                    <td class="has-text-centered">{{ course.dayOfWeek }}</td>
+                    <td class="has-text-centered">{{ course.timeSlot }}</td>
+                    <td class="has-text-centered">{{ course.location }}</td>
+                    <td class="has-text-centered">{{ course.capacity }}</td>
+                    <td class="has-text-right">
+                        <button class="button is-info is-small mr-2" (click)="onEdit(course.id)">
+                            <span class="icon">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </button>
+                        <button class="button is-info is-small mr-2" (click)="onDelete(course.id)">
+                            <span class="icon">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--TODO mobile alternative to table, maybe cards-->

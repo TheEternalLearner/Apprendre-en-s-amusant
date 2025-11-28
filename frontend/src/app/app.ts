@@ -11,5 +11,5 @@ import { Header } from './header/header';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('English-app');
+  protected readonly title = signal('Apprendre l\'Anglais en s\'Amusant');
 }

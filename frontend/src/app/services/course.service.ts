@@ -1,48 +1,33 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Course } from '../models/course.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  /**  Pour l'instant mes courses sont ici
-    * A l'avenir peut être avoir une api qui gère ?
-    * Dans le cas d'outil admin 
-    */
-  private courses: Course[] = [
-    new Course('My first Course',
-      'This course is dedicated to learning the basics concepts',
-      'https://cdn.pixabay.com/photo/2015/11/26/09/14/school-1063556_960_720.jpg',
-      12,
-      'Beginner',
-      '8-12 years'
-    ),
-    new Course('My second Course',
-      'This course is dedicated to learning intermediate concepts',
-      'https://cdn.pixabay.com/photo/2014/10/14/20/14/library-488678_960_720.jpg',
-      8,
-      'Beginner',
-      '8-12 years'
-    ),
-    new Course('My third Course',
-      'This course is dedicated to learning intermediate concepts',
-      'https://cdn.pixabay.com/photo/2015/05/19/14/55/educational-773651_960_720.jpg',
-      15,
-      'Beginner',
-      '8-12 years'
-    )
-  ];
+  private apiUrl = 'http://localhost:8080/api/courses';
 
-  getCourses(): Course[] {
-    return  [...this.courses];
+  constructor(private http: HttpClient) {}
+
+  createCourse(course: Course): Observable<Course> {
+    return this.http.post<Course>(this.apiUrl, course);
   }
 
-  getCourseById(CourseId: string): Course {
-    const foundCourse = this.courses.find(course => course.id === CourseId);
-    if (!foundCourse) {
-      throw new Error('Course not found');
-    }
-    return foundCourse;
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.apiUrl);
   }
 
+  getCourseById(courseId: number): Observable<Course> {
+    return this.http.get<Course>(`${this.apiUrl}/${courseId}`);
+  }
+
+  editCourse(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course);
+  }
+
+  deleteCourse(courseId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${courseId}`);
+  }
 }

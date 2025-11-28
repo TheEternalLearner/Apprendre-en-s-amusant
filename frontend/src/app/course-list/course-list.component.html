@@ -1,0 +1,35 @@
+<div class="container">
+    <h1 class="title has-text-centered mb-6">Cours disponibles</h1>
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th class="has-text-left">Intitulé</th>
+                <th class="has-text-centered">Niveau</th>
+                <th class="has-text-centered">Jour</th>
+                <th class="has-text-centered">Horaire</th>
+                <th class="has-text-centered">Lieu</th>
+                <th class="has-text-centered">Capacité</th>
+                <th class="has-text-right"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (course of courses; track course.id) {
+                <tr>
+                    <td class="has-text-left"><strong>{{ course.title }}</strong></td>
+                    <td class="has-text-centered"><span class="tag is-info">{{ course.level }}</span></td>
+                    <td class="has-text-centered">{{ course.dayOfWeek }}</td>
+                    <td class="has-text-centered">{{ course.timeSlot }}</td>
+                    <td class="has-text-centered">{{ course.location }}</td>
+                    <td class="has-text-centered">{{ course.capacity }}</td>
+                    <td class="has-text-right">
+                        <button class="button is-primary is-small" (click)="onSignUp(course.id)">
+                            S'inscrire
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!--TODO mobile alternative to table, maybe cards-->
