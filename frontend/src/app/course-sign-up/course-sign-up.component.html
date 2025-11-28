@@ -21,7 +21,7 @@
               
               <select [(ngModel)]="formData.courseId" name="courseId">
                 @for (course of courses; track course.id) {
-                  <option value="{{course.id}}">{{course.title}}</option>
+                  <option [value]="course.id">{{course.title}}</option>
                 }
               </select>
             </div>
