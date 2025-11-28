@@ -1,9 +1,11 @@
 // course-sign-up.component.ts
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormsModule, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CourseService } from '../services/course.service';
+import { Course } from '../models/course.model';
 
 @Component({
   selector: 'app-course-sign-up',
@@ -12,18 +14,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./course-sign-up.component.css']
 })
 
-export class CourseSignUpComponent {
+export class CourseSignUpComponent implements OnInit {
   private http = inject(HttpClient);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
+  private courseService = inject(CourseService);
 
   formData = {
     firstName: '',
     lastName: '',
     email: '',
-    course: '',
+    courseId: '',
   };
 
+  courses: Course[] = [];
+  
+  ngOnInit(): void {
+    this.courseService.getCourses().subscribe(courses => {
+      // You can use the courses array here to get the IDs or any other information
+      this.courses = courses;
+      console.log(courses);
+    });
+  }
+  
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.snackBar.open('Veuillez remplir tous les champs correctement.', 'OK', {
