@@ -2,6 +2,7 @@ package com.ensamusant.apprendre.controller;
 
 import com.ensamusant.apprendre.model.Course;
 import com.ensamusant.apprendre.service.CourseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CourseController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Course> createCourse(@RequestBody Course newCourse) {
+    public ResponseEntity<Course> createCourse(@Valid @RequestBody Course newCourse) {
         newCourse.setId(null); // removing id to force new id creation
         Course savedCourse = courseService.saveCourse(newCourse);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCourse);
@@ -43,7 +44,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable("id") Long id, @RequestBody Course newCourse) {
+    public ResponseEntity<Course> updateCourse(@PathVariable("id") Long id, @Valid @RequestBody Course newCourse) {
         Optional<Course> course = courseService.getCourse(id);
         if (course.isPresent()) {
             Course savedCourse = course.get();
