@@ -28,6 +28,7 @@ describe('CourseSignUpComponent', () => {
     component = fixture.componentInstance;
     httpMock = TestBed.inject(HttpTestingController);
     fixture.detectChanges();
+    httpMock.expectOne('http://localhost:8080/api/courses').flush([]);
   });
 
   afterEach(() => {
@@ -42,13 +43,13 @@ describe('CourseSignUpComponent', () => {
     expect(component.formData.firstName).toBe('');
     expect(component.formData.lastName).toBe('');
     expect(component.formData.email).toBe('');
-    expect(component.formData.course).toBe('');
+    expect(component.formData.courseId).toBe('');
   });
 
   it('should show success message on successful submission', () => {
     const mockForm = {
       invalid: false,
-      value: { firstName: 'John', lastName: 'Doe', email: 'john@example.com', course: '1' }
+      value: { firstName: 'John', lastName: 'Doe', email: 'john@example.com', courseId: '1' }
     } as NgForm;
 
     component.onSubmit(mockForm);
@@ -68,7 +69,7 @@ describe('CourseSignUpComponent', () => {
   it('should show error message on failed submission', () => {
     const mockForm = {
       invalid: false,
-      value: { firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', course: '2' }
+      value: { firstName: 'Jane', lastName: 'Doe', email: 'jane@example.com', courseId: '2' }
     } as NgForm;
 
     component.onSubmit(mockForm);
@@ -102,7 +103,7 @@ describe('CourseSignUpComponent', () => {
   it('should redirect to home page after successful submission', () => {
     const mockForm = {
       invalid: false,
-      value: { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', course: '3' }
+      value: { firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', courseId: '3' }
     } as NgForm;
 
     component.onSubmit(mockForm);
