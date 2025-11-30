@@ -2,6 +2,7 @@ package com.ensamusant.apprendre.integration.controller;
 
 import com.ensamusant.apprendre.model.Course;
 import com.ensamusant.apprendre.model.Role;
+import com.ensamusant.apprendre.model.User;
 import com.ensamusant.apprendre.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +58,23 @@ public class UserControllerIT {
 
     @Test
     public void getUserById_ShouldReturnStatus200IfIdExists() throws Exception {
+        User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setEmail("john.doe@mail.com");
+        user.setTelephone("0680342465");
+        user.setAddress("3 rue de Paris, Valenciennes");
+        userRepository.save(user);
 
+        // Act & Assert
+        mockMvc.perform(get("/api/users/" + user.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value("John"))
+                .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.email").value("john.doe@mail.com"))
+                .andExpect(jsonPath("$.telephone").value("0680342465"))
+                .andExpect(jsonPath("$.address").value("3 rue de Paris, Valenciennes"))
+                .andExpect(jsonPath("$.role").value("USER"));
     }
 
 
