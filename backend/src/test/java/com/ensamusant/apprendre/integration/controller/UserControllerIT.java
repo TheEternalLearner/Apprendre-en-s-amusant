@@ -31,7 +31,7 @@ public class UserControllerIT {
     @Test
     public void createUser_ShouldReturnStatus201AndCreateUser() throws Exception {
         // Arrange
-        String formJson = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"email\":\"john.doe@mail.com\",\"telephone\":\"0680342528\",\"address\":\"3 rue de Paris Valenciennes\"}";
+        String formJson = "{\"firstName\":\"John\",\"lastName\":\"Doe\", \"password\":\"password\", \"email\":\"john.doe@mail.com\",\"telephone\":\"0680342528\",\"address\":\"3 rue de Paris Valenciennes\"}";
 
         // Act & Assert
         mockMvc.perform(post("/api/users")
@@ -40,6 +40,7 @@ public class UserControllerIT {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName").value("John"))
                 .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.password").value("password"))
                 .andExpect(jsonPath("$.email").value("john.doe@mail.com"))
                 .andExpect(jsonPath("$.telephone").value("0680342528"))
                 .andExpect(jsonPath("$.address").value("3 rue de Paris Valenciennes"))
@@ -72,6 +73,7 @@ public class UserControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("John"))
                 .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.password").value("password"))
                 .andExpect(jsonPath("$.email").value("john.doe@mail.com"))
                 .andExpect(jsonPath("$.telephone").value("0680342465"))
                 .andExpect(jsonPath("$.address").value("3 rue de Paris, Valenciennes"))
@@ -89,10 +91,11 @@ public class UserControllerIT {
     @Test
     public void editUser_ShouldReturnStatus200AndUpdateUserCorrectly() throws Exception {
         // Arrange
-        String formJson = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"email\":\"jane.doe@mail.com\",\"telephone\":\"0680342449\",\"address\":\"3 rue de Paris, Valenciennes\"}";
+        String formJson = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"password\":\"password\",\"email\":\"jane.doe@mail.com\",\"telephone\":\"0680342449\",\"address\":\"3 rue de Paris, Valenciennes\"}";
         User user = new User();
         user.setFirstName("John");
         user.setLastName("Doe");
+        user.setPassword("newPassword");
         user.setEmail("john.doe@mail.com");
         user.setTelephone("0680342465");
         user.setAddress("3 rue de Paris, Valenciennes");
@@ -106,6 +109,7 @@ public class UserControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Jane"))
                 .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.password").value("newPassword"))
                 .andExpect(jsonPath("$.email").value("jane.doe@mail.com"))
                 .andExpect(jsonPath("$.telephone").value("0680342449"))
                 .andExpect(jsonPath("$.address").value("3 rue de Paris, Valenciennes"))
@@ -118,6 +122,7 @@ public class UserControllerIT {
         User user = new User();
         user.setFirstName("John");
         user.setLastName("Doe");
+        user.setPassword("password");
         user.setEmail("john.doe@mail.com");
         user.setTelephone("0680342465");
         user.setAddress("3 rue de Paris, Valenciennes");

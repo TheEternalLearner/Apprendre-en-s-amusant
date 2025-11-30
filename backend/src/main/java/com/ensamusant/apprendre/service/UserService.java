@@ -1,7 +1,6 @@
 package com.ensamusant.apprendre.service;
 
 
-import com.ensamusant.apprendre.model.Course;
 import com.ensamusant.apprendre.model.Role;
 import com.ensamusant.apprendre.model.User;
 import com.ensamusant.apprendre.repository.UserRepository;

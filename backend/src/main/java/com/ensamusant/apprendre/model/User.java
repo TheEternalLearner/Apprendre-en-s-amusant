@@ -21,6 +21,8 @@ public class User {
     @NotBlank
     private String lastName;
     @NotBlank
+    private String password;
+    @NotBlank
     @Email
     private String email;
     private String telephone;

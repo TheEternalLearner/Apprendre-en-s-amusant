@@ -54,6 +54,10 @@ public class UserController {
             if (newLastName != "") {
                 currentUser.setLastName(newLastName);
             }
+            String newPassword = newUser.getPassword();
+            if (newPassword != "") {
+                currentUser.setPassword(newPassword);
+            }
             String newEmail = newUser.getEmail();
             if (newEmail != "") {
                 currentUser.setEmail(newEmail);
