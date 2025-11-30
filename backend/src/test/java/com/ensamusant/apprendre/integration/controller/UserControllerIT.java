@@ -103,6 +103,7 @@ public class UserControllerIT {
         mockMvc.perform(put("/api/users/" + user.getId())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(formJson))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Jane"))
                 .andExpect(jsonPath("$.lastName").value("Doe"))
                 .andExpect(jsonPath("$.email").value("jane.doe@mail.com"))
@@ -113,7 +114,22 @@ public class UserControllerIT {
 
     @Test
     public void deleteCourse_ShouldReturnStatus200AndDeleteCourse() throws Exception {
+        // Arrange
+        User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setEmail("john.doe@mail.com");
+        user.setTelephone("0680342465");
+        user.setAddress("3 rue de Paris, Valenciennes");
+        user.setRole(Role.USER);
+        userRepository.save(user);
 
+        // Act & Assert
+        mockMvc.perform(put("/api/users/" + user.getId()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/api/users" + user.getId()))
+                .andExpect(status().isNotFound());
     }
 
     @AfterEach
