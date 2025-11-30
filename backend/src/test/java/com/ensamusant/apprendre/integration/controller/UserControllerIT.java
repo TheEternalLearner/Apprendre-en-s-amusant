@@ -125,7 +125,7 @@ public class UserControllerIT {
         userRepository.save(user);
 
         // Act & Assert
-        mockMvc.perform(put("/api/users/" + user.getId()))
+        mockMvc.perform(delete("/api/users/" + user.getId()))
                 .andExpect(status().isOk());
 
         mockMvc.perform(get("/api/users" + user.getId()))
