@@ -2,6 +2,7 @@ package com.ensamusant.apprendre.service;
 
 
 import com.ensamusant.apprendre.model.Course;
+import com.ensamusant.apprendre.model.Role;
 import com.ensamusant.apprendre.model.User;
 import com.ensamusant.apprendre.repository.UserRepository;
 import lombok.Data;
@@ -20,7 +21,10 @@ public class UserService {
 
     public Iterable<User> getUsers() { return userRepository.findAll() ;}
 
-    public User saveUser(User user) {
+    public User editUser(User user) {
+        if (user.getRole() == null) {
+            user.setRole(Role.USER);
+        }
         User savedUser = userRepository.save(user);
         return savedUser;
     }

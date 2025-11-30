@@ -64,6 +64,7 @@ public class UserControllerIT {
         user.setEmail("john.doe@mail.com");
         user.setTelephone("0680342465");
         user.setAddress("3 rue de Paris, Valenciennes");
+        user.setRole(Role.USER);
         userRepository.save(user);
 
         // Act & Assert
@@ -80,7 +81,18 @@ public class UserControllerIT {
 
     @Test
     public void getUserById_ShouldReturnStatus404IfIdDoesNotExist() throws Exception {
+        //Arrange
+        User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setEmail("john.doe@mail.com");
+        user.setTelephone("0680342465");
+        user.setAddress("3 rue de Paris, Valenciennes");
+        user.setRole(Role.USER);
 
+        // Act & Assert
+            mockMvc.perform(get("/api/users/" + user.getId()))
+                    .andExpect(status().isNotFound());
     }
 
     @Test

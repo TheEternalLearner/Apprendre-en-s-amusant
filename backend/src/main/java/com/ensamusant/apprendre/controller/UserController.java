@@ -22,12 +22,17 @@ public class UserController {
     public ResponseEntity<User> createUser(@Valid @RequestBody User newUser) {
         newUser.setId(null);
         newUser.setRole(Role.USER);
-        User savedUser = userService.saveUser(newUser);
+        User savedUser = userService.editUser(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     @GetMapping("")
     public Iterable <User> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<User> getUserById(@PathVariable("id") Long id ) {
+        return userService.getUser(id);
     }
 }
