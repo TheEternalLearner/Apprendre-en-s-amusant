@@ -23,8 +23,7 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.course = new Course(0, '', 0, '', '', '', '');
-      
+      this.course = new Course(0, '', null, '', '', '', '');
       this.courseService.getCourseById(+id).subscribe({
         next: (course) => {
           this.course = course;
@@ -34,7 +33,7 @@ export class CourseFormComponent implements OnInit {
         }
       });
     } else {
-      this.course = new Course(0, '', 0, '', '', '', '');
+      this.course = new Course(0, '', null, '', '', '', '');
     }
     
   }
@@ -52,8 +51,18 @@ export class CourseFormComponent implements OnInit {
       this.courseService.editCourse(this.course).subscribe({
         next: () => {
           this.router.navigate(['/admin/cours']);
+          this.snackBar.open('Cours modifié avec succès', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-success']
+          });
         },
-        error: (err) => console.error('Erreur d\'édition:', err)
+        error: (err) => {
+          this.snackBar.open('Erreur lors de la modification du cours', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-error']
+          });
+          console.error('Erreur d\'édition:', err);
+        }
       });
     } else {
       this.courseService.createCourse(this.course).subscribe({

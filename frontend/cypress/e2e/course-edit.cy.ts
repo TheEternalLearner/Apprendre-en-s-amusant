@@ -18,7 +18,7 @@ describe('Course Creation Form E2E', () => {
     cy.wait('@getCourse');
   });
 
-  it('should display the course creation form', () => {
+  it('should display the course edition form', () => {
     cy.contains('label', 'Intitulé').should('be.visible');
     cy.get('input[name="title"]').should('have.value', 'Anglais Débutant 6-9 ans');
     cy.get('input[name="level"]').should('have.value', 'Débutant');
@@ -31,6 +31,12 @@ describe('Course Creation Form E2E', () => {
 
   it('should show error when submitting empty form', () => {
 
+    cy.get('input[name="title"]').clear();
+    cy.get('input[name="level"]').clear();
+    cy.get('input[name="dayOfWeek"]').clear();
+    cy.get('input[name="timeSlot"]').clear();
+    cy.get('input[name="location"]').clear();
+    cy.get('input[name="capacity"]').clear();
     cy.get('button[type="submit"]').click();  
     cy.contains('Veuillez remplir tous les champs correctement').should('be.visible');
   });
@@ -73,6 +79,6 @@ describe('Course Creation Form E2E', () => {
     cy.get('input[name="capacity"]').clear().type('15');
     cy.get('button[type="submit"]').click();
     cy.wait('@editCourseError');
-    cy.contains("Erreur lors de l'édition du cours").should('be.visible');
+    cy.contains("Erreur lors de la modification du cours").should('be.visible');
   });
 });
