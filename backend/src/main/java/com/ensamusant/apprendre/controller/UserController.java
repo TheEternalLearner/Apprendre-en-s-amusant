@@ -5,6 +5,7 @@ import com.ensamusant.apprendre.model.User;
 import com.ensamusant.apprendre.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,16 @@ public class UserController {
     }
 
     @GetMapping("")
-    public Iterable <User> getUsers() {
+    public Iterable<User> getUsers() {
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable("id") Long id ) {
-        return userService.getUser(id);
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id ) {
+        Optional<User> user = userService.getUser(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 }
