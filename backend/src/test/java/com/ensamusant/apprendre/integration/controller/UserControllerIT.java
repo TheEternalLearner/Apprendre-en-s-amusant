@@ -42,7 +42,7 @@ public class UserControllerIT {
                 .andExpect(jsonPath("$.email").value("john.doe@mail.com"))
                 .andExpect(jsonPath("$.telephone").value("0680342528"))
                 .andExpect(jsonPath("$.address").value("3 rue de Paris Valenciennes"))
-                .andExpect(jsonPath("$.role").value(Role.USER))
+                .andExpect(jsonPath("$.role").value("USER"))
                 .andExpect(jsonPath("$.id").exists());
 
     }
