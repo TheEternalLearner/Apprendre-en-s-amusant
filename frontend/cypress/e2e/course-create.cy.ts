@@ -40,7 +40,7 @@ describe('Course Creation Form E2E', () => {
         location: 'La Sentinelle',
         capacity: 15
       }
-    }).as('submitForm');
+    }).as('courseCreate');
     cy.get('input[name="title"]').type('Anglais Débutant 6-9 ans');
     cy.get('input[name="level"]').type('Débutant');
     cy.get('input[name="dayOfWeek"]').type('Lundi');
@@ -49,7 +49,7 @@ describe('Course Creation Form E2E', () => {
     cy.get('input[name="capacity"]').type('15');
     cy.get('button[type="submit"]').click();
     
-    cy.wait('@submitForm');
+    cy.wait('@courseCreate');
 
     cy.contains('Cours créé avec succès').should('be.visible');
     cy.url().should('include', '/admin/cours');
@@ -59,7 +59,7 @@ describe('Course Creation Form E2E', () => {
     cy.intercept('POST', 'http://localhost:8080/api/courses', {
       statusCode: 500,
       body: {}
-    }).as('submitFormError');
+    }).as('courseCreateError');
     cy.get('input[name="title"]').type('Anglais Débutant 6-9 ans');
     cy.get('input[name="level"]').type('Débutant');
     cy.get('input[name="dayOfWeek"]').type('Lundi');
@@ -67,7 +67,7 @@ describe('Course Creation Form E2E', () => {
     cy.get('input[name="location"]').type('La Sentinelle');
     cy.get('input[name="capacity"]').type('15');
     cy.get('button[type="submit"]').click();
-    cy.wait('@submitFormError');
+    cy.wait('@courseCreateError');
     cy.contains('Erreur lors de la création du cours').should('be.visible');
   });
 });
