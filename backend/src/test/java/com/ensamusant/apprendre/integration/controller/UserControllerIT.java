@@ -49,7 +49,10 @@ public class UserControllerIT {
 
     @Test
     public void getAllUser_ShouldReturnStatus200AndEmptyArray() throws Exception {
-
+        // Act & Assert
+        mockMvc.perform(get("/api/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
     }
 
     @Test
