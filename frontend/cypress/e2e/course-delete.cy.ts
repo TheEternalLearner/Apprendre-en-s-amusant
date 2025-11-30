@@ -92,7 +92,7 @@ describe('Course List E2E', () => {
   });
 
   it('should handle server error gracefully', () => {
-    cy.intercept('DELETE', 'http://localhost:8080/api/courses/123', {
+    cy.intercept('DELETE', 'http://localhost:8080/api/courses/1', {
       statusCode: 500,
       body: {}
     }).as('deleteCourseError');
