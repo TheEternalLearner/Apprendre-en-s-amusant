@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Course Creation Form E2E', () => {
+describe('Course Edition Form E2E', () => {
   beforeEach(() => {
     cy.intercept('GET', 'http://localhost:8080/api/courses/123', {
       statusCode: 200,
