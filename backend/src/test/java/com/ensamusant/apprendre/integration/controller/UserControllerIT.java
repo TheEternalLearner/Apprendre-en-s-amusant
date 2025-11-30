@@ -81,15 +81,34 @@ public class UserControllerIT {
 
     @Test
     public void getUserById_ShouldReturnStatus404IfIdDoesNotExist() throws Exception {
-
         // Act & Assert
-            mockMvc.perform(get("/api/users/999" ))
-                    .andExpect(status().isNotFound());
+        mockMvc.perform(get("/api/users/999" ))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    public void updateUser_ShouldReturnStatus200AndUpdateUserCorrectly() throws Exception {
+    public void editUser_ShouldReturnStatus200AndUpdateUserCorrectly() throws Exception {
+        // Arrange
+        String formJson = "{\"firstName\":\"Jane\",\"lastName\":\"Doe\",\"email\":\"jane.doe@mail.com\",\"telephone\":\"0680342449\",\"address\":\"3 rue de Paris, Valenciennes\"}";
+        User user = new User();
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setEmail("john.doe@mail.com");
+        user.setTelephone("0680342465");
+        user.setAddress("3 rue de Paris, Valenciennes");
+        user.setRole(Role.USER);
+        userRepository.save(user);
 
+        // Act & Assert
+        mockMvc.perform(put("/api/users/" + user.getId())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(formJson))
+                .andExpect(jsonPath("$.firstName").value("Jane"))
+                .andExpect(jsonPath("$.lastName").value("Doe"))
+                .andExpect(jsonPath("$.email").value("jane.doe@mail.com"))
+                .andExpect(jsonPath("$.telephone").value("0680342449"))
+                .andExpect(jsonPath("$.address").value("3 rue de Paris, Valenciennes"))
+                .andExpect(jsonPath("$.role").value("USER"));
     }
 
     @Test

@@ -40,4 +40,36 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> editUser(@PathVariable("id") Long id, @Valid @RequestBody User newUser ) {
+        Optional<User> user = userService.getUser(id);
+        if (user.isPresent()) {
+            User currentUser = user.get();
+            String newFirstName = newUser.getFirstName();
+            if (newFirstName != "") {
+                currentUser.setFirstName(newFirstName);
+            }
+            String newLastName = newUser.getLastName();
+            if (newLastName != "") {
+                currentUser.setLastName(newLastName);
+            }
+            String newEmail = newUser.getEmail();
+            if (newEmail != "") {
+                currentUser.setEmail(newEmail);
+            }
+            String newTelephone = newUser.getTelephone();
+            if (newTelephone != "") {
+                currentUser.setTelephone(newTelephone);
+            }
+            String newAddress = newUser.getAddress();
+            if (newAddress != "") {
+                currentUser.setAddress(newAddress);
+            }
+            userService.editUser(currentUser);
+            return ResponseEntity.ok(currentUser);
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }
