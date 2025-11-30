@@ -35,8 +35,22 @@ describe('Course List E2E', () => {
       statusCode: 200,
       body:{}
     }).as('deleteCourse');
+    cy.intercept('GET', 'http://localhost:8080/api/courses', {
+        statusCode: 200,
+        body: [
+            {
+            id: 2,
+            title: 'Anglais Intermédiaire Adulte',
+            level: 'Intermédiaire',
+            dayOfWeek: 'Mardi',
+            timeSlot: '14:00-16:00',
+            location: 'Visio',
+            capacity: 12
+            }
+        ]
+        }).as('getCoursesAfterDelete');
 
-    cy.get('tr').contains('Anglais Débutant 6-9 ans').parent().find('i.fas.fa-trash').parent('button').click();
+    cy.contains('Anglais Débutant 6-9 ans').closest('tr').find('[data-cy="delete-course"]').click();
     cy.on('window:confirm', () => true);
     cy.wait('@deleteCourse');
 
@@ -49,7 +63,7 @@ describe('Course List E2E', () => {
   it('should not remove course if deletion is cancelled', () => {
     // No need to intercept DELETE since it should not be called
 
-    cy.get('tr').contains('Anglais Débutant 6-9 ans').parent().find('i.fas.fa-trash').parent('button').click();
+    cy.contains('Anglais Débutant 6-9 ans').closest('tr').find('[data-cy="delete-course"]').click();
     cy.on('window:confirm', () => false);
     cy.wait(500); // wait to ensure no deletion occurs
 
@@ -65,7 +79,7 @@ describe('Course List E2E', () => {
       body: {}
     }).as('deleteNonExistentCourse');
 
-    cy.get('tr').contains('Anglais Débutant 6-9 ans').parent().find('i.fas.fa-trash').parent('button').click();
+    cy.contains('Anglais Débutant 6-9 ans').closest('tr').find('[data-cy="delete-course"]').click();
     cy.on('window:confirm', () => true);
     cy.wait('@deleteNonExistentCourse');
 
@@ -82,7 +96,7 @@ describe('Course List E2E', () => {
       statusCode: 500,
       body: {}
     }).as('deleteCourseError');
-    cy.get('tr').contains('Anglais Débutant 6-9 ans').parent().find('i.fas.fa-trash').parent('button').click();
+    cy.contains('Anglais Débutant 6-9 ans').closest('tr').find('[data-cy="delete-course"]').click();
     cy.on('window:confirm', () => true);
     cy.wait('@deleteCourseError');
     cy.contains("Erreur lors de la suppression du cours").should('be.visible');
