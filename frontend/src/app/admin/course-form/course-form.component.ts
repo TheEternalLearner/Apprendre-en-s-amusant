@@ -3,6 +3,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-course-form',
@@ -14,14 +16,14 @@ export class CourseFormComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private courseService = inject(CourseService);
+  private snackBar = inject(MatSnackBar);
 
   course!: Course;
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.course = new Course(0, '', 0, '', '', '', '');
-      
+      this.course = new Course(0, '', null, '', '', '', '');
       this.courseService.getCourseById(+id).subscribe({
         next: (course) => {
           this.course = course;
@@ -31,25 +33,52 @@ export class CourseFormComponent implements OnInit {
         }
       });
     } else {
-      this.course = new Course(0, '', 0, '', '', '', '');
+      this.course = new Course(0, '', null, '', '', '', '');
     }
     
   }
 
   onSubmit(form:NgForm) {
+    if (form.invalid) {
+      this.snackBar.open('Veuillez remplir tous les champs correctement.', 'OK', {
+        duration: 3000,
+        panelClass: ['snack-error']
+      });
+      return;
+    }
+
     if (this.course.id) {
       this.courseService.editCourse(this.course).subscribe({
         next: () => {
           this.router.navigate(['/admin/cours']);
+          this.snackBar.open('Cours modifié avec succès', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-success']
+          });
         },
-        error: (err) => console.error('Erreur d\'édition:', err)
+        error: (err) => {
+          this.snackBar.open('Erreur lors de la modification du cours', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-error']
+          });
+          console.error('Erreur d\'édition:', err);
+        }
       });
     } else {
       this.courseService.createCourse(this.course).subscribe({
         next: () => {
           this.router.navigate(['/admin/cours']);
+           this.snackBar.open('Cours créé avec succès', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-success']
+          });
         },
-        error: (err) => console.error('Erreur de création:', err)
+        error: () => {
+          this.snackBar.open('Erreur lors de la création du cours', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-error']
+          });
+        }
       });
     }
   }

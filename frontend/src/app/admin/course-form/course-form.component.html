@@ -3,28 +3,28 @@
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="column">
         <label class="label">Intitulé :</label>
-        <input class="input" [(ngModel)]="course.title" name="title" required>
+        <input class="input" [(ngModel)]="course.title" name="title" required placeholder="Ex: Anglais Débutant 6-9 ans">
       </div>
       
       <div class="column">
         <label class="label">Niveau :</label>
-        <input class="input" [(ngModel)]="course.level" name="level" required>
+        <input class="input" [(ngModel)]="course.level" name="level" required placeholder="Ex: Débutant">
       </div>
       <div class="column">
         <label class="label">Jour:</label>
-        <input class="input" [(ngModel)]="course.dayOfWeek" name="dayOfWeek" required>
+        <input class="input" [(ngModel)]="course.dayOfWeek" name="dayOfWeek" required placeholder="Ex: Lundi">
       </div>
       <div class="column">
         <label class="label">Horaire :</label>
-        <input class="input" [(ngModel)]="course.timeSlot" name="timeSlot" required>
+        <input class="input" [(ngModel)]="course.timeSlot" name="timeSlot" required placeholder="Ex: 10:00-12:00">
       </div>
       <div class="column">
         <label class="label">Lieu :</label>
-        <input class="input" [(ngModel)]="course.location" name="location" required>
+        <input class="input" [(ngModel)]="course.location" name="location" required placeholder="Ex: La Sentinelle">
       </div>
       <div class="column">
         <label class="label">Capacité :</label>
-        <input class="input" [(ngModel)]="course.capacity" name="capacity" required>
+        <input class="input" [(ngModel)]="course.capacity" name="capacity" required placeholder="Ex: 15">
       </div>
       <div class="column">
         <button class="button is-primary is-light" type="submit">Sauvegarder</button>
