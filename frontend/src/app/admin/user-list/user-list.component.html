@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @for(user of users; track user.id) {
+            <tr>
+                <td> {{user.id}} </td>
+                <td> {{user.firstName}} </td>
+                <td> {{user.lastName}} </td>
+                <td> {{user.email}} </td>
+                <td> {{user.telephone}} </td>
+                <td> {{user.address}} </td>            
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
