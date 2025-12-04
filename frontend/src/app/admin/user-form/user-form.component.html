@@ -1,1 +1,29 @@
-<p>user-form works!</p>
+<div class="container">
+    <div class="columns is-centered">
+        <form #f="ngForm" (onSubmit)="onSubmit(f)">
+            <div class="column">
+                <label class="label">Prénom :</label>
+                <input type="text" [(ngModel)]="user.firstName" class="input" required>
+            </div>  
+            <div class="column">
+                <label class="label" [(ngModel)]="user.lastName" >Nom :</label>
+                <input type="text" class="input" required>
+            </div>
+            <div class="column">
+                <label class="label" [(ngModel)]="user.email">Email :</label>
+                <input type="text" class="input" required>
+            </div>
+                
+            <div class="column">
+                <label class="label" [(ngModel)]="user.telephone">Téléphone :</label>
+                <input type="text" class="input">
+            </div>
+                
+            <div class="column">
+                <label class="label" [(ngModel)]="user.address">Adresse :</label>
+                <input type="text" class="input">
+            </div>
+        </form>
+
+    </div>
+</div>
