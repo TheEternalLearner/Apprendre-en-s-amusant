@@ -10,6 +10,10 @@ export class UserService {
   private apiUrl = 'http://localhost:8080/api/users'; 
   http = inject(HttpClient);
   
+  createUser(user: User): Observable <User> {
+    return this.http.post<User>(this.apiUrl, user);
+  }
+  
   getUsers(): Observable <User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
