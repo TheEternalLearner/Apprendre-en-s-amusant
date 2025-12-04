@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent implements OnInit {
+export class AdminUserListComponent implements OnInit {
   private userService = inject(UserService)
   users: User[] = [];
 
