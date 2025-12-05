@@ -26,6 +26,25 @@ export class UserFormComponent {
       });
       return;
     }
-    this.router.navigate("/admin/utilisateurs");
+    if (this.user.id) {
+      // TODO if user has id i.e exist apply editUser method
+    } else {
+      this.router.navigate(["/admin/utilisateurs"]);
+      this.userService.createUser(this.user).subscribe({
+        next: () => {
+          this.router.navigate(['admin/utilisateurs']);
+          this.snackBar.open('Utilisateur créé avec succès', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-success']
+          });
+        },
+        error: () => {
+          this.snackBar.open('Erreur lors de la création de l\'utilisateur', 'OK', {
+            duration: 3000,
+            panelClass: ['snack-error']
+          });
+        }
+      });
+    }
   }
 }
