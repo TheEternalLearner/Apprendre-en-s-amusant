@@ -13,7 +13,21 @@
                 <label class="label">Email :</label>
                 <input type="text" [(ngModel)]="user.email" name="email" class="input" required>
             </div>
-                
+            <div class="column">
+                <label class="label">Définir Mot de passe :</label>
+                <input type="text" [(ngModel)]="user.password" name="password" class="input" required>
+            </div>
+            <div class="column">
+                <label class="label">Role :</label>
+                <div class="control">
+                    <div class="select">
+                        <select class="select" [(ngModel)]="user.role" name="role">
+                            <option class="option" value="USER">UTILISATEUR</option>
+                            <option class="option" value="ADMIN">ADMINISTRATEUR</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="column">
                 <label class="label">Téléphone :</label>
                 <input type="text" [(ngModel)]="user.telephone" name="telephone" class="input">

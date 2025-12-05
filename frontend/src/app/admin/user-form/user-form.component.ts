@@ -19,7 +19,7 @@ export class UserFormComponent implements OnInit {
   user !: User;
 
   ngOnInit(): void {
-      this.user = new User(0, "", "", "");
+      this.user = new User(0, "", "", "", "", 'USER');
   }
 
   onSubmit(form:NgForm) {
