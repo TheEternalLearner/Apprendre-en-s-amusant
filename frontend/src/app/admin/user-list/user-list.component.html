@@ -18,6 +18,7 @@
                 <th class="has-text-centered">Email</th>
                 <th class="has-text-centered">Téléphone</th>
                 <th class="has-text-centered">Adresse</th>
+                <th class="has-text-centered">Role</th>
                 <th></th>
             </tr>
         </thead>
@@ -30,7 +31,8 @@
                     <td class="has-text-centered"> {{user.lastName}} </td>
                     <td class="has-text-centered"> {{user.email}} </td>
                     <td class="has-text-centered"> {{user.telephone}} </td>
-                    <td class="has-text-centered"> {{user.address}} </td>      
+                    <td class="has-text-centered"> {{user.address}} </td>
+                    <td class="has-text-centered"> {{user.role == 'ADMIN'? 'ADMINISTRATEUR': 'UTILISATEUR' }} </td>      
                     <td> 
                         <button class="button is-info is-small mr-2">
                             <span class="icon">
