@@ -6,6 +6,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { AdminCourseListComponent } from './admin/course-list/course-list.component';
 import { CourseFormComponent } from './admin/course-form/course-form.component';
 import { AdminUserListComponent } from './admin/user-list/user-list.component';
+import { UserFormComponent } from './admin/user-form/user-form.component';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path: 'admin/cours', component: AdminCourseListComponent},
     {path: 'admin/cours/nouveau', component: CourseFormComponent},
     {path: 'admin/cours/:id/edit', component: CourseFormComponent},
-    {path: 'admin/utilisateurs', component: AdminUserListComponent}
+    {path: 'admin/utilisateurs', component: AdminUserListComponent},
+    {path: 'admin/utilisateurs/nouveau', component: UserFormComponent}
 ];
