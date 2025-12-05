@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { FormsModule, NgForm } from "@angular/forms";
 import { User } from '../../models/user.model';
@@ -11,12 +11,16 @@ import { Router } from '@angular/router';
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
   private userService = inject(UserService);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
 
   user !: User;
+
+  ngOnInit(): void {
+      this.user = new User(0, "", "", "");
+  }
 
   onSubmit(form:NgForm) {
     if(form.invalid) {
@@ -29,7 +33,6 @@ export class UserFormComponent {
     if (this.user.id) {
       // TODO if user has id i.e exist apply editUser method
     } else {
-      this.router.navigate(["/admin/utilisateurs"]);
       this.userService.createUser(this.user).subscribe({
         next: () => {
           this.router.navigate(['admin/utilisateurs']);
