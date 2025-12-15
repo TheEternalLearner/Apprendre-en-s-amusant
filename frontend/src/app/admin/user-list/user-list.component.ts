@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-list',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class AdminUserListComponent implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
   users: User[] = [];
 
   ngOnInit(): void {
@@ -26,4 +28,20 @@ export class AdminUserListComponent implements OnInit {
     this.router.navigate(["/admin/utilisateurs/nouveau"]);
   }
 
+  onDelete(id: number) {
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+        this.snackBar.open('Utilisateur supprimé avec succès', 'OK', 
+          { duration: 3000, panelClass: ['snackbar-success'] 
+        });
+      },
+      error: () => {
+        this.snackBar.open('Erreur lors de la suppression de l\'utilisateur', 'OK', 
+          { duration: 3000, panelClass: ['snackbar-error'] 
+        });
+      }
+    });
+
+  }
 }
