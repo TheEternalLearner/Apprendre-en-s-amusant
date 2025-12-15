@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { FormsModule, NgForm } from "@angular/forms";
 import { User } from '../../models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -15,11 +15,29 @@ export class UserFormComponent implements OnInit {
   private userService = inject(UserService);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
+  private route = inject(ActivatedRoute)
 
   user !: User;
 
   ngOnInit(): void {
+      
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
       this.user = new User(0, "", "", "", "", 'USER');
+      this.userService.getUserById(+id).subscribe({
+        next: (user) => {
+          this.user = user;
+        },
+        error: () => { 
+          this.snackBar.open('Erreur lors du chargement de l\'utilisateur', 'OK',  {
+            duration: 3000, panelClass: ['snack-error']
+          })
+        }
+        
+      });
+    } else {
+      this.user = new User(0, "", "", "", "", 'USER');
+    }
   }
 
   onSubmit(form:NgForm) {
@@ -32,7 +50,19 @@ export class UserFormComponent implements OnInit {
     }
     if (this.user.id) {
       // TODO if user has id i.e exist apply editUser method
-      
+      this.userService.editUser(this.user).subscribe({
+      next: () => {
+        this.router.navigate(["admin/utilisateurs"])
+        this.snackBar.open('Utilisateur modifié avec succès', 'OK', {
+          duration: 3000, panelClass: ['snack-success']
+        })
+      },
+      error: () => {
+        this.snackBar.open('Erreur lors de l\'édition d\'utilisateur', 'OK', {
+          duration: 3000, panelClass: ['snack-error']
+        })
+      }
+    });
     } else {
       this.userService.createUser(this.user).subscribe({
         next: () => {

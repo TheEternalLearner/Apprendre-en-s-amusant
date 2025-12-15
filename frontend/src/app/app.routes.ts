@@ -17,5 +17,6 @@ export const routes: Routes = [
     {path: 'admin/cours/nouveau', component: CourseFormComponent},
     {path: 'admin/cours/:id/edit', component: CourseFormComponent},
     {path: 'admin/utilisateurs', component: AdminUserListComponent},
-    {path: 'admin/utilisateurs/nouveau', component: UserFormComponent}
+    {path: 'admin/utilisateurs/nouveau', component: UserFormComponent},
+    {path: 'admin/utilisateurs/:id/edit', component: UserFormComponent}
 ];

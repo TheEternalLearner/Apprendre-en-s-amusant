@@ -34,7 +34,7 @@
                     <td class="has-text-centered"> {{user.address}} </td>
                     <td class="has-text-centered"> {{user.role == 'ADMIN'? 'ADMINISTRATEUR': 'UTILISATEUR' }} </td>      
                     <td> 
-                        <button class="button is-info is-small mr-2">
+                        <button class="button is-info is-small mr-2" (click)="onEdit(user.id)" data-cy="edit-user">
                             <span class="icon">
                                 <i class="fas fa-pen"></i>
                             </span>

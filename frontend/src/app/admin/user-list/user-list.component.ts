@@ -28,20 +28,25 @@ export class AdminUserListComponent implements OnInit {
     this.router.navigate(["/admin/utilisateurs/nouveau"]);
   }
 
-  onDelete(id: number) {
-    this.userService.deleteUser(id).subscribe({
-      next: () => {
-        this.ngOnInit();
-        this.snackBar.open('Utilisateur supprimé avec succès', 'OK', 
-          { duration: 3000, panelClass: ['snackbar-success'] 
-        });
-      },
-      error: () => {
-        this.snackBar.open('Erreur lors de la suppression de l\'utilisateur', 'OK', 
-          { duration: 3000, panelClass: ['snackbar-error'] 
-        });
-      }
-    });
+  onEdit(id: number) {
+    this.router.navigate([`admin/utilisateurs/${id}/edit`])
+  }
 
+  onDelete(id: number) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          this.ngOnInit();
+          this.snackBar.open('Utilisateur supprimé avec succès', 'OK', 
+            { duration: 3000, panelClass: ['snackbar-success'] 
+          });
+        },
+        error: () => {
+          this.snackBar.open('Erreur lors de la suppression de l\'utilisateur', 'OK', 
+            { duration: 3000, panelClass: ['snackbar-error'] 
+          });
+        }
+      });
+    }
   }
 }
