@@ -2,7 +2,6 @@ package com.ensamusant.apprendre.integration.controller;
 
 import com.ensamusant.apprendre.model.Course;
 import com.ensamusant.apprendre.repository.CourseRepository;
-import com.ensamusant.apprendre.service.CourseService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
