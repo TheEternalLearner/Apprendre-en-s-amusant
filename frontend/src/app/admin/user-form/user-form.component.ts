@@ -49,7 +49,6 @@ export class UserFormComponent implements OnInit {
       return;
     }
     if (this.user.id) {
-      // TODO if user has id i.e exist apply editUser method
       this.userService.editUser(this.user).subscribe({
       next: () => {
         this.router.navigate(["admin/utilisateurs"])
