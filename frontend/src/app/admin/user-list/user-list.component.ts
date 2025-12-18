@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class AdminUserListComponent implements OnInit {
+export class UserListComponent implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
