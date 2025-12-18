@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 export class CourseListComponent implements OnInit {
   courses!: Course[];
   private router = inject(Router);
-
-  constructor(private courseService: CourseService) {}
+  private courseService = inject(CourseService);
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe({

@@ -1,0 +1,56 @@
+<div class="container">
+    <h1 class="title has-text-centered mb-6">Gestion des utilisateurs</h1>
+    <div class="buttons mb-4">
+        <button class="button is-primary" (click)="onCreate()">
+            <span class="icon">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span>Ajouter un utilisateur</span>
+        </button>
+    </div>
+    
+    <table class="table is-fullwidth is-striped is-hoverable">
+        <thead>
+            <tr>
+                <th class="has-text-left">Id</th>
+                <th class="has-text-centered">Prénom</th>
+                <th class="has-text-centered">Nom</th>
+                <th class="has-text-centered">Email</th>
+                <th class="has-text-centered">Téléphone</th>
+                <th class="has-text-centered">Adresse</th>
+                <th class="has-text-centered">Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @for(user of users; track user.id) {
+                <tr>
+                    <td> {{user.id}} </td>
+                    <td class="has-text-centered"> {{user.firstName}} </td>
+                    <td class="has-text-centered"> {{user.lastName}} </td>
+                    <td class="has-text-centered"> {{user.email}} </td>
+                    <td class="has-text-centered"> {{user.telephone}} </td>
+                    <td class="has-text-centered"> {{user.address}} </td>
+                    <td class="has-text-centered"> {{user.role == 'ADMIN'? 'ADMINISTRATEUR': 'UTILISATEUR' }} </td>      
+                    <td> 
+                        <button class="button is-info is-small mr-2" (click)="onEdit(user.id)" data-cy="edit-user">
+                            <span class="icon">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </button>   
+                        <button class="button is-info is-small mr-2" (click)= "onDelete(user.id)" data-cy="delete-user">
+                            <span class="icon">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>  
+                    </td>      
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+        
+
+

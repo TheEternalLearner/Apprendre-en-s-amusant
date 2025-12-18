@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Course List E2E', () => {
+describe('Course deletion E2E', () => {
     beforeEach(() => {
         cy.intercept('GET', 'http://localhost:8080/api/courses', {
       statusCode: 200,

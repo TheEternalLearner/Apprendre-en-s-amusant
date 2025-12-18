@@ -7,32 +7,80 @@ Showcase website for English lessons with course sign-up functionality.
 ## Project Structure
 
     Apprendre-en-s-amusant/
-    ├── backend/                # Spring Boot backend (API + Mail)
+    ├── backend/                       # Spring Boot backend (API + Mail)
     │   ├── src/
     │   │   ├── main/
-    │   │   │   ├── java/       # Java source code (controllers, services, models)
-    │   │   │   └── resources/  # application.properties, templates, etc.
-    │   │   └── test/           # Unit and integration tests
-    │   ├── pom.xml             # Maven dependencies and build config
-    │   └── README.md           # (Optionnel) backend-specific info
+    │   │   │   ├── java/
+    │   │   │   │   └── com/ensamusant/apprendre/
+    │   │   │   │       ├── controller/   # REST controllers
+    │   │   │   │       ├── model/        # Entities, DTOs, enums
+    │   │   │   │       ├── repository/   # Spring Data JPA repositories
+    │   │   │   │       ├── service/      # Business logic
+    │   │   │   │       └── config/       # Configuration classes
+    │   │   │   └── resources/
+    │   │   │       ├── application.properties
+    │   │   │       ├── data.sql
+    │   │   │       ├── static/
+    │   │   │       └── templates/
+    │   │   └── test/
+    │   │       ├── java/com/ensamusant/apprendre/
+    │   │       │   ├── ApprendreEnSAmusantApplicationTests.java
+    │   │       │   ├── controller/
+    │   │       │   │   └── SignUpFormControllerTest.java
+    │   │       │   ├── service/
+    │   │       │   │   └── MailServiceTest.java
+    │   │       │   └── integration/controller/
+    │   │       │       ├── CourseControllerIT.java
+    │   │       │       ├── SignUpFormControllerIT.java
+    │   │       │       └── UserControllerIT.java
+    │   │       └── resources/
+    │   │           └── application-test.properties
+    │   ├── pom.xml
+    │   └── HELP.md
     │
-    ├── frontend/               # Angular frontend (UI)
+    ├── frontend/                      # Angular frontend (UI)
     │   ├── src/
     │   │   ├── app/
     │   │   │   ├── about/
-    │   │   │   ├── course/          # Component for listing courses
+    │   │   │   ├── admin/
+    │   │   │   │   ├── course-form/
+    │   │   │   │   ├── course-list/
+    │   │   │   │   ├── user-form/
+    │   │   │   │   └── user-list/
+    │   │   │   ├── course-list/
+    │   │   │   ├── course-sign-up/
     │   │   │   ├── header/
     │   │   │   ├── home/
-    │   │   │   ├── models/          # Interfaces and classes
-    │   │   │   ├── services/        # Business logic and API calls
-    │   │   │   └── single-course/   # Component for individual course page
-    │   │   └── assets/              # Images, icons, static files
+    │   │   │   ├── models/           # Interfaces and classes (User, Course, etc.)
+    │   │   │   ├── section/
+    │   │   │   ├── services/         # API and business logic
+    │   │   │   └── app.*             # Main app config, routes, etc.
+    │   │   └── public/
+    │   │       └── img/              # Images (logo, etc.)
+    │   ├── cypress/
+    │   │   ├── e2e/
+    │   │   │   ├── course/
+    │   │   │   │   ├── course-create.cy.ts
+    │   │   │   │   ├── course-edit.cy.ts
+    │   │   │   │   ├── course-delete.cy.ts
+    │   │   │   │   └── course-list.cy.ts
+    │   │   │   ├── user/
+    │   │   │   │   ├── user-create.cy.ts
+    │   │   │   │   ├── user-edit.cy.ts
+    │   │   │   │   ├── user-delete.cy.ts
+    │   │   │   │   └── user-list.cy.ts
+    │   │   │   └── course-sign-up.cy.ts
+    │   │   └── support/
+    │   │       ├── commands.ts
+    │   │       └── e2e.ts
     │   ├── angular.json
     │   ├── package.json
-    │   └── tsconfig.json
+    │   ├── tsconfig.json
+    │   └── tsconfig.app.json
     │
     ├── .gitignore
     ├── LICENSE
+    ├── netlify.toml
     └── README.md
 
 
