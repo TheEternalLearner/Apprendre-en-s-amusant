@@ -13,7 +13,7 @@ public class ApprendreEnSAmusantApplication {
 	public static void main(String[] args) {
 
         // getting variables from .env
-        Dotenv dotenv = Dotenv.configure().ignoreIfMalformed().load();
+        Dotenv dotenv = Dotenv.configure().ignoreIfMalformed().ignoreIfMissing().load();
 
         // Converting variables to PropertySource for Spring
         Map<String, Object> map = dotenv.entries().stream()
