@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CourseService } from '../services/course.service';
 import { Course } from '../models/course.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-course-sign-up',
@@ -15,6 +16,7 @@ import { Course } from '../models/course.model';
 })
 
 export class CourseSignUpComponent implements OnInit {
+  private apiUrl = `${environment.apiUrl}/api`;
   private http = inject(HttpClient);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
@@ -46,7 +48,7 @@ export class CourseSignUpComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://localhost:8080/api/signup/submit', form.value)
+    this.http.post(`${this.apiUrl}/signup/submit`, form.value)
       .subscribe({
         next: () => {
           this.snackBar.open('Inscription envoyée avec succès !', 'OK', {
